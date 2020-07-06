@@ -1,6 +1,7 @@
-const projectItem = ( projId, projTitle, currentTasks, completedTasks) => {
-    
-    return {projId, projTitle, currentTasks, completedTasks}
+const projectItem = (projTitle, tasksList, projId) => {
+    // let projectcounter = 0;
+    let taskCounter = 0; 
+    return {projId, projTitle, tasksList, taskCounter}
 };
 
 export default projectItem
