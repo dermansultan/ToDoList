@@ -11,10 +11,10 @@ const project2 = projectItem('Default Project2', {}, projectList.projectCounter+
 projectList.projectListObject["proj1"] = project1;
 projectList.projectListObject["proj2"] = project2;
 //project1
-const item1 = taskItem('Make the Eat', `yum`, '01/01/2020', 'high', false, project1.taskCounter++);
-const item2 = taskItem('Take out Garbage', 'take it out boy', 'TBA', 'high', false, project1.taskCounter++);
-const item3 = taskItem('Use the washroom', 'never forget to', 'TBA', 'high', false, project1.taskCounter++); 
-const item4 = taskItem('play roblox', 'also buy vbuc', 'TBA', 'high', false, project1.taskCounter++);
+const item1 = taskItem('Make dinner', `yum`, '01/01/2020', 'Low', false, project1.taskCounter++);
+const item2 = taskItem('Take out Garbage', 'take it out boy', 'TBA', 'Med', false, project1.taskCounter++);
+const item3 = taskItem('Use the washroom', 'never forget to', 'TBA', 'High', false, project1.taskCounter++); 
+const item4 = taskItem('Play Modern Warfare', 'also buy vbuc', 'TBA', 'Low', false, project1.taskCounter++);
 
 //project2
 const item6 = taskItem('Test6', 'test desc', 'TBA', 'high', false, project2.taskCounter++);
@@ -22,7 +22,6 @@ const item7 = taskItem('Test7', 'test desc', 'TBA', 'high', false, project2.task
 const item8 = taskItem('Test8', 'test desc', 'TBA', 'high', true, project2.taskCounter++);
 
 
-// project1.tasksList items
 project1.tasksList.task1 = item1;
 project1.tasksList.task2 = item2;
 project1.tasksList.task3 = item3;

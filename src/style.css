@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Muli:wght@300;400;600;700;800;900&display=swap');
 
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+  }
+
 body {
     background-color: white;
     font-family: Muli;
@@ -9,42 +15,60 @@ body {
 .projectTitle{
     color: #46529D;
     font-size: 24px;
+    white-space: nowrap;
+}
+
+.projectTitleWrapper{
+    display: flex;
+    padding-left: 15px;
+    align-items: center;
+}
+
+/* Parent Container */
+
+.projectDetailsWrapper{
+    display: flex;
+    width: 100vw;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .currentTitle{
-
     color: #46529D;
     font-weight: 600;
     font-size: 18px;
-
+    padding-left: 8px;
 }
+
 
 .completedTitle{
-
     color: #46529D;
     font-weight: 600;
     font-size: 18px;
+    padding-left: 8px;
 }
+
 
 .taskTitle{
     color: #46529D;
     font-style: normal;
-    color: #46529D;
     font-weight: 600;
-    font-size: 18px;
-    line-height: 23px;
+    font-size: 16px;
 }
 
 .taskCompleteBtn{
-    color: #46529D;
+    background-color: #2EBAEE;
+
 }
 
 .taskPriority{
 color: #2EBAEE;
+font-size: 10px;
 }
 
 .taskDueDate{
 color: #2EBAEE;
+font-size: 10px
 }
 
 .taskDesc{
@@ -55,9 +79,101 @@ color: #2EBAEE;
     color: #46529D;
 }
 
+.currentDivWrapper{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    padding-top: 10px;
+}
+
+.completedDivWrapper{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    padding-top: 10px;
+}
+
 .taskItemWrapper{
-    width: 340px;
+    display: flex;
+  justify-content:space-between;
+  align-items:center;
+    width: 100vw;
     height: 66px;
     border-radius: 10px;
     box-shadow: 0px 4px 9px #E6E6E6;
+    flex-direction: row;
+}
+ 
+.rightIconsWrapper{
+    display: inline-block;
+    padding-right: 10px;
+}
+
+.leftWrapper{
+padding-top: 10px;
+padding-left: 15px;
+display:flex;
+flex-direction:column;
+}
+
+.taskPriorityWrapper{
+    display: flex;
+    align-items: center;
+}
+
+.metaWrapper{
+    display: flex;
+}
+
+.taskDueDateWrapper{
+    display: flex;
+    align-items: center;
+}
+
+
+.fa-check-double{
+    font-size: 15px;
+}
+
+.fa-star{
+    font-size: 15px;
+}
+
+.fa-clock{
+    width: 10px;
+    height: 10px;
+}
+
+.fa-exclamation-circle{
+    width: 10px;
+    height: 10px;
+}
+
+.fa-plus-circle{
+font-size: 70px;
+color: #2EBAEE;
+position: fixed;
+bottom: 30px;
+right: 20px; 
+z-index: 99;
+}
+
+.projectEditBtn{
+    padding-left: 10px;
+    border: none;
+    background:none;
+    width: 15px;
+    height: 15px;
+}
+
+.fa-edit{
+    color: #46529D;
+    width: 15px;
+    height: 15px;
+}
+
+.fa-bars{
+    font-size: 24px;
+    padding-left: 5px;
+    color: #46529D;
 }
