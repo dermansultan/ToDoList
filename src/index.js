@@ -1,4 +1,3 @@
-// import { format, compareAsc } from 'date-fns';
 import taskItem from './toDoTaskItem'
 import projectList from './projectsList'
 import projectItem from './projectItem'
@@ -11,10 +10,10 @@ const project2 = projectItem('Default Project2', {}, projectList.projectCounter+
 projectList.projectListObject["proj1"] = project1;
 projectList.projectListObject["proj2"] = project2;
 //project1
-const item1 = taskItem('Make dinner', `yum`, '01/01/2020', 'Low', false, project1.taskCounter++);
-const item2 = taskItem('Take out Garbage', 'take it out boy', 'TBA', 'Med', false, project1.taskCounter++);
-const item3 = taskItem('Use the washroom', 'never forget to', 'TBA', 'High', false, project1.taskCounter++); 
-const item4 = taskItem('Play Modern Warfare', 'also buy vbuc', 'TBA', 'Low', false, project1.taskCounter++);
+const item1 = taskItem('Make dinner', `yum`, '01/01/2020', 'Low', false, ++project1.taskCounter);
+const item2 = taskItem('Take out Garbage', 'take it out boy', 'TBA', 'Medium', false, ++project1.taskCounter);
+const item3 = taskItem('Use the washroom', 'never forget to', 'TBA', 'High', false, ++project1.taskCounter); 
+const item4 = taskItem('Play Modern Warfare', 'also buy vbuc', 'TBA', 'Low', false, ++project1.taskCounter);
 
 //project2
 const item6 = taskItem('Test6', 'test desc', 'TBA', 'high', false, project2.taskCounter++);
