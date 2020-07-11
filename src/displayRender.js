@@ -5,17 +5,83 @@ import currentProject from './index'
 
 const displayRender = (() => {
 // create the project container based off of what the project object is...
+
+
 function modalOpen(){
     console.log('the modal should open now...')
     modalOverlay.style.visibility = 'visible';
     } 
 
+    // Pre rendered HTML elements 
     const projectContainer = document.getElementById('projectContainer');    
     const modalOverlay = document.createElement('div');
     modalOverlay.className = 'modalOverlay';
     const modalContent = document.createElement('div');
     modalContent.className = 'modalContent';
+
+    // Project tab Modal
+    const projectModalContainer = document.createElement('div');
+    projectModalContainer.className = 'projectModalContainer';
+
+    const projectModalContent = document.createElement('div');
+    projectModalContent.className = 'projectModalContent';
+
+    const projectModalCloseBtn = document.createElement('button');
+    projectModalCloseBtn.className = 'projectModalCloseBtn';
+    const projectModalCloseBtnIcon = document.createElement('i');
+    projectModalCloseBtnIcon.className = 'fas fa-times-circle';
+    projectModalCloseBtn.appendChild(projectModalCloseBtnIcon);
+
+    const projectAddBtnWrapper = document.createElement('div');
+    projectAddBtnWrapper.className = 'projectAddBtnWrapper';
+    const projectAddBtnIcon = document.createElement('i');
+    projectAddBtnIcon.className = 'fas fa-folder-plus';
+
+    projectAddBtnWrapper.appendChild(projectAddBtnIcon);
+    projectModalContent.appendChild(projectModalCloseBtn);
+    projectModalContent.appendChild(projectAddBtnWrapper);
+
+    const projectModalContentList = document.createElement('ol');
+    projectModalContentList.className = 'projectModalContentList';
+    projectModalContent.appendChild(projectModalContentList);
+
+
+
+    //Appends to containers
+    projectModalContainer.appendChild(projectModalContent);
+    projectContainer.appendChild(projectModalContainer);
+
+    function renderProjListItem(obj){
+        let projItemWrapper = document.createElement('li');
+        projItemWrapper.className = 'projItemWrapper';
+
+        let projectItemIcon = document.createElement('i');
+        projectItemIcon.className = 'fas fa-folder';
+        projItemWrapper.appendChild(projectItemIcon);
+
+        let projItemTitle = document.createElement('h2');
+        projItemTitle.innerText = `${obj.projTitle}`;
+        projItemTitle.className = 'projItemTitle';
+        projItemWrapper.appendChild(projItemTitle);
+
+        return projItemWrapper;
+
+    }
     
+    function renderProjList(obj){
+        let projListObj = obj.projectListObject;
+        console.log(projListObj);
+        Object.keys(projListObj).forEach(element => {
+            let projItem = renderProjListItem(projListObj[element]);
+            projectModalContentList.appendChild(projItem);
+        });
+    }
+
+
+    function modalClose(){
+        modalOverlay.style.visibility = "hidden";
+        modalContent.textContent = '';
+    }
 
     // click out modal reset modal content
     window.addEventListener('click', function(event) {
@@ -51,14 +117,28 @@ function modalOpen(){
        }
 
 
+
+
 function renderProjectItem(obj){
 
 let projectDetailsWrapper = document.createElement('div');
 projectDetailsWrapper.className = 'projectDetailsWrapper';
 projectContainer.appendChild(projectDetailsWrapper);
 
+let hamIconWrapper = document.createElement('button');
+hamIconWrapper.className = 'hamIconWrapper';
+
 let hamIcon = document.createElement('i');
 hamIcon.className = 'fas fa-bars';
+hamIcon.id = 'burger';
+
+hamIconWrapper.appendChild(hamIcon);
+
+hamIconWrapper.addEventListener('click', () => {
+    projectModalContainer.style.width = '50vw';
+    projectModalContent.style.visibility = 'visible'
+    
+});
 
 let emptyDiv = document.createElement('div');
 emptyDiv.className = 'empty';
@@ -80,7 +160,7 @@ projectEditBtn.appendChild(projectEditIcon);
 projectTitleWrapper.appendChild(projectTitle);
 projectTitleWrapper.appendChild(projectEditBtn);
 
-projectDetailsWrapper.appendChild(hamIcon);
+projectDetailsWrapper.appendChild(hamIconWrapper);
 projectDetailsWrapper.appendChild(projectTitleWrapper);
 projectDetailsWrapper.appendChild(emptyDiv);
 // Completed Div Creation:
@@ -288,6 +368,7 @@ function renderProj(obj){
     renderTaskList(obj);
     }
 
+    // Creating a task
     function modalContentTask(modalOv){
         let taskForm = document.createElement('form');
         taskForm.className = 'taskForm';
@@ -301,7 +382,7 @@ function renderProj(obj){
         let taskFormTitleIn = document.createElement('input');
         taskFormTitleIn.className = 'taskFormTitleIn';
         taskFormTitleIn.placeholder = 'Name your task';
-        taskFormTitleIn.required;
+        taskFormTitleIn.required = true;
         taskFormTitleWrapper.appendChild(taskFormTitleLbl);
         taskFormTitleWrapper.appendChild(taskFormTitleIn);
         
@@ -314,7 +395,7 @@ function renderProj(obj){
         let taskFormDescIn = document.createElement('input');
         taskFormDescIn.className = 'taskFormDescIn';
         taskFormDescIn.placeholder = 'Describe the task';
-        taskFormDescIn.required;
+        taskFormDescIn.required = true;
         taskFormDescWrapper.appendChild(taskFormDescLbl);
         taskFormDescWrapper.appendChild(taskFormDescIn);
         
@@ -326,8 +407,10 @@ function renderProj(obj){
         taskFormDateLbl.className = 'taskFormDateLbl';
         let taskFormDateIn = document.createElement('input');
         taskFormDateIn.className = 'taskFormDateIn';
+        let today = new Date();
+        taskFormDateIn.value = today.toISOString().substr(0, 10);;
         taskFormDateIn.type = 'date';
-        taskFormDateIn.required;
+        taskFormDateIn.required = true;
         taskFormDateWrapper.appendChild(taskFormDateLbl);
         taskFormDateWrapper.appendChild(taskFormDateIn);
         
@@ -341,7 +424,7 @@ function renderProj(obj){
         taskFormPrLbl.innerText = 'Priority';
         
         let taskFormPrSlct = document.createElement('select');
-        taskFormPrSlct.required;
+        taskFormPrSlct.required = true;
         taskFormPrSlct.class = 'taskFormPrSlct';
         
         let lowOption = document.createElement('option');
@@ -362,25 +445,27 @@ function renderProj(obj){
         
         // submit button
         let submitBtn = document.createElement('input')
+        submitBtn.type = 'submit';
         submitBtn.className = 'submitBtn';
         submitBtn.innerText = 'create';
-        submitBtn.type = 'submit';
-        submitBtn.addEventListener('click', () => {
+        taskForm.addEventListener('submit', (event) => {
+            event.preventDefault();
             currentProject.tasksList[`task${++currentProject.taskCounter}`] = taskItem(`${taskFormTitleIn.value}`, `${taskFormDescIn.value}`, `${format(taskFormDateIn.valueAsDate.setDate(taskFormDateIn.valueAsDate.getDate() + 1), 'MMM do yyyy')}`, `${taskFormPrSlct.value}`, false, currentProject.taskCounter);
             pushTask(renderTaskItem(currentProject.tasksList[`task${currentProject.taskCounter}`]), currentProject.tasksList[`task${currentProject.taskCounter}`].completed);
-
             console.log(currentProject.tasksList);
-            
+            modalClose();
         });
         
-        modalOv.appendChild(taskFormTitleWrapper);
-        modalOv.appendChild(taskFormDescWrapper);
-        modalOv.appendChild(taskFormDateWrapper);
-        modalOv.appendChild(taskFormPrWrapper);
-        modalOv.appendChild(submitBtn);
-        
+        taskForm.appendChild(taskFormTitleWrapper);
+        taskForm.appendChild(taskFormDescWrapper);
+        taskForm.appendChild(taskFormDateWrapper);
+        taskForm.appendChild(taskFormPrWrapper);
+        taskForm.appendChild(submitBtn);
+        modalOv.appendChild(taskForm);
+
         }
 
+        // Editing a task
         function modalContentEditTask(modalOv, taskKey){
             let taskForm = document.createElement('form');
             taskForm.className = 'taskForm';
@@ -395,7 +480,7 @@ function renderProj(obj){
             taskFormTitleLbl.innerText = 'Task';
             let taskFormTitleIn = document.createElement('input');
             taskFormTitleIn.className = 'taskFormTitleIn';
-            taskFormTitleIn.placeholder = `${taskObj.title}`;
+            taskFormTitleIn.value = `${taskObj.title}`;
             taskFormTitleWrapper.appendChild(taskFormTitleLbl);
             taskFormTitleWrapper.appendChild(taskFormTitleIn);
             
@@ -407,7 +492,7 @@ function renderProj(obj){
             taskFormDescLbl.innerText = 'Description';
             let taskFormDescIn = document.createElement('input');
             taskFormDescIn.className = 'taskFormDescIn';
-            taskFormDescIn.placeholder = `${taskObj.desc}`;
+            taskFormDescIn.value = `${taskObj.desc}`;
             taskFormDescWrapper.appendChild(taskFormDescLbl);
             taskFormDescWrapper.appendChild(taskFormDescIn);
             
@@ -420,11 +505,12 @@ function renderProj(obj){
             let taskFormDateIn = document.createElement('input');
             taskFormDateIn.className = 'taskFormDateIn';
             taskFormDateIn.type = 'date';
-            taskFormDateIn.placeholder = `${taskObj.dueDate}`;
+            let today = new Date();
+            taskFormDateIn.value = today.toISOString().substr(0, 10);;
             taskFormDateWrapper.appendChild(taskFormDateLbl);
             taskFormDateWrapper.appendChild(taskFormDateIn);
             
-            //  Priority CHANGE DEFAULT HERE 
+            //  Priority 
             let taskFormPrWrapper = document.createElement('div');
             taskFormPrWrapper.className = 'taskFormPrWrapper';
             let taskFormPrChoiceWrapper = document.createElement('div');
@@ -472,6 +558,7 @@ function renderProj(obj){
                 wrapper.querySelector('.taskDesc').innerText = `${taskFormDescIn.value}`;
                 wrapper.querySelector('.taskPriority').innerText = `${taskFormPrSlct.value}`;
                 wrapper.querySelector('.taskDueDate').innerText = `${format(taskFormDateIn.valueAsDate.setDate(taskFormDateIn.valueAsDate.getDate() + 1), 'MMM do yyyy')}`;
+                modalClose();
             });
             
             modalOv.appendChild(taskFormTitleWrapper);
@@ -482,7 +569,8 @@ function renderProj(obj){
             
             }
 
-return { renderTaskList, renderTaskItem, renderProjectItem, renderProj }
+
+return { renderTaskList, renderTaskItem, renderProjectItem, renderProj, renderProjListItem, renderProjList }
 
 })();
 
