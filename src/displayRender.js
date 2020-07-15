@@ -1,7 +1,8 @@
 import { format } from 'date-fns'
 import taskItem from './toDoTaskItem'
 import projectList from './projectsList'
-import currentProject from './index'
+// import currentProject from './index'
+let currentProject = projectList.projectListObject[Object.keys(projectList.projectListObject)[0]];
 
 const displayRender = (() => {
 // create the project container based off of what the project object is...
@@ -30,6 +31,12 @@ function modalOpen(){
     projectModalCloseBtn.className = 'projectModalCloseBtn';
     const projectModalCloseBtnIcon = document.createElement('i');
     projectModalCloseBtnIcon.className = 'fas fa-times-circle';
+    projectModalCloseBtn.addEventListener('click', ()=> {
+        projectModalContainer.style.width = '0';
+        projectModalContent.style.opacity = '0';
+        projectModalContent.style.pointerEvents = 'none'
+        projectModalCloseBtn.style.marginLeft = '0';
+    });
     projectModalCloseBtn.appendChild(projectModalCloseBtnIcon);
 
     const projectAddBtnWrapper = document.createElement('div');
@@ -53,7 +60,20 @@ function modalOpen(){
 
     function renderProjListItem(obj){
         let projItemWrapper = document.createElement('li');
+        projItemWrapper.dataset.projwrapperid = `${obj.projId}`;
         projItemWrapper.className = 'projItemWrapper';
+        projItemWrapper.addEventListener('click', () => {
+            console.log('clickAZ')
+            let foundProj = Object.keys(projectList.projectListObject).find(key => projectList.projectListObject[key]["projId"] == `${projItemWrapper.dataset.projwrapperid}`);
+            console.log(foundProj);
+            currentProject = projectList.projectListObject[`${foundProj}`];
+            projectContainer.textContent = '';
+            setTimeout(() => {
+                renderProj(currentProject);
+            }, 1000);
+
+
+        });
 
         let projectItemIcon = document.createElement('i');
         projectItemIcon.className = 'fas fa-folder';
@@ -134,9 +154,12 @@ hamIcon.id = 'burger';
 
 hamIconWrapper.appendChild(hamIcon);
 
+// effects on modal
 hamIconWrapper.addEventListener('click', () => {
     projectModalContainer.style.width = '50vw';
-    projectModalContent.style.visibility = 'visible'
+    projectModalContent.style.opacity = '1';
+    projectModalCloseBtn.style.marginLeft = '50vw';
+    projectModalContent.style.pointerEvents = 'auto';
     
 });
 
