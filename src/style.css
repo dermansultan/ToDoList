@@ -273,14 +273,15 @@ border-radius: 35px;
 
 .projectModalCloseBtn{
     display: flex;
-    margin-left: 50vw;
+    margin-left: 0;
     flex-direction: column;
     transition: 0.5s;
 }
 
 .projectModalContent{
-    visibility: hidden;
-    /* transition: 0.5s; */
+    opacity: 0;
+    transition: 0.5s;
+    pointer-events: none;
 
 }
 
