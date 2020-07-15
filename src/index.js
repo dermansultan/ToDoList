@@ -33,9 +33,23 @@ project2.tasksList.task3 = item8;
 
 // displayRender.renderProj(projectList.currentProjectTaskList);
 
-let currentProject = projectList.projectListObject[Object.keys(projectList.projectListObject)[0]];
+
+
+export let currentProject = projectList.projectListObject[Object.keys(projectList.projectListObject)[0]];
+
+// export function getCurrentProject(){
+//     return currentProject
+// }
+
+export function changeCurrentProject(obj){ 
+    currentProject = obj; 
+}
+// let currentProject = projectList.projectListObject[Object.keys(projectList.projectListObject)[0]];
+
+
+// Give user a default Project
 displayRender.renderProj(currentProject);
 displayRender.renderProjList(projectList);
 // console.log(currentProject);
 console.log(currentProject.tasksList);
-export default currentProject;
+

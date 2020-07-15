@@ -1,9 +1,7 @@
 import { format } from 'date-fns'
 import taskItem from './toDoTaskItem'
 import projectList from './projectsList'
-// import currentProject from './index'
-let currentProject = projectList.projectListObject[Object.keys(projectList.projectListObject)[0]];
-
+import {changeCurrentProject, currentProject} from './index'
 const displayRender = (() => {
 // create the project container based off of what the project object is...
 
@@ -66,13 +64,12 @@ function modalOpen(){
             console.log('clickAZ')
             let foundProj = Object.keys(projectList.projectListObject).find(key => projectList.projectListObject[key]["projId"] == `${projItemWrapper.dataset.projwrapperid}`);
             console.log(foundProj);
-            currentProject = projectList.projectListObject[`${foundProj}`];
+            changeCurrentProject(projectList.projectListObject[`${foundProj}`]);
+            console.log(currentProject);
             projectContainer.textContent = '';
             setTimeout(() => {
-                renderProj(currentProject);
+            renderProj(currentProject);                
             }, 1000);
-
-
         });
 
         let projectItemIcon = document.createElement('i');
@@ -387,8 +384,8 @@ Object.keys(tasksListObject).forEach(element => {
 
 function renderProj(obj){
     // object in this case is a project
-    renderProjectItem(obj);
-    renderTaskList(obj);
+    renderProjectItem(obj); // ham duplication
+    renderTaskList(obj); 
     }
 
     // Creating a task
