@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import taskItem from "./toDoTaskItem";
 import projectList from "./projectsList";
 import { getCurrentProject, changeCurrentProject, currentProject } from "./index";
+import projectItem from "./projectItem";
 const displayRender = (() => {
   // create the project container based off of what the project object is...
 
@@ -81,6 +82,10 @@ const displayRender = (() => {
   projectAddBtnWrapper.className = "projectAddBtnWrapper";
   const projectAddBtnIcon = document.createElement("i");
   projectAddBtnIcon.className = "fas fa-folder-plus";
+  projectAddBtnWrapper.addEventListener('click', () => {
+    modalOpen();
+    createNewTask(modalContent);
+  });
 
   projectAddBtnWrapper.appendChild(projectAddBtnIcon);
   projectModalContent.appendChild(projectModalCloseBtn);
@@ -166,6 +171,10 @@ const displayRender = (() => {
     } else {
       currentDiv.appendChild(taskItem);
     }
+  }
+
+  function pushProject(projLi){
+    projectModalContentList.appendChild(projLi);
   }
 
   function renderProjectItem(obj) {
@@ -626,6 +635,31 @@ const displayRender = (() => {
     modalOv.appendChild(taskFormDateWrapper);
     modalOv.appendChild(taskFormPrWrapper);
     modalOv.appendChild(submitBtn);
+  
+  
+  }
+
+  function createNewTask(modalOv){
+    let newProjectForm = document.createElement('form');
+    newProjectForm.className = 'newProjectForm';
+    let projectFormTitle = document.createElement('label');
+    projectFormTitle.className = 'projectFormTitle';
+    projectFormTitle.innerText = 'Project Title'
+    let projectFormTitleIn = document.createElement('input');
+    projectFormTitleIn.className = 'projectFormTitleIn';
+    let projectFormSubmitBtn = document.createElement('button');
+    projectFormSubmitBtn.className = 'projectFormSubmitBtn';
+    newProjectForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      console.log(projectList.projectCounter);
+      console.log(projectList);
+      let projectWrapped = projectList.projectListObject[`proj${++projectList.projectCounter}`] = projectItem(`${projectFormTitleIn.value}`, {}, projectList.projectCounter);
+      pushProject(renderProjListItem(projectWrapped));
+    });    
+    newProjectForm.appendChild(projectFormTitle);
+    newProjectForm.appendChild(projectFormTitleIn);
+    newProjectForm.appendChild(projectFormSubmitBtn);
+    modalOv.appendChild(newProjectForm);
   }
 
   return {
