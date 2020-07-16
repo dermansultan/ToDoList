@@ -37,9 +37,9 @@ project2.tasksList.task3 = item8;
 
 export let currentProject = projectList.projectListObject[Object.keys(projectList.projectListObject)[0]];
 
-// export function getCurrentProject(){
-//     return currentProject
-// }
+export function getCurrentProject(){
+    return currentProject
+}
 
 export function changeCurrentProject(obj){ 
     currentProject = obj; 
