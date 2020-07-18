@@ -35,15 +35,9 @@ const displayRender = (() => {
   setTimeout(() => {
     projectTitle.innerText = `${getCurrentProject().projTitle}`;
   }, 100);
-  let projectEditBtn = document.createElement("button");
-  let projectEditIcon = document.createElement("i");
-  projectEditIcon.className = "far fa-edit";
-  projectEditBtn.className = "projectEditBtn";
   let projectTitleWrapper = document.createElement("div");
   projectTitleWrapper.className = "projectTitleWrapper";
-  projectEditBtn.appendChild(projectEditIcon);
   projectTitleWrapper.appendChild(projectTitle);
-  projectTitleWrapper.appendChild(projectEditBtn);
   projectDetailsWrapper.appendChild(projectTitleWrapper);
   let emptyDiv = document.createElement("div");
   emptyDiv.className = "empty";
@@ -84,7 +78,7 @@ const displayRender = (() => {
   projectAddBtnIcon.className = "fas fa-folder-plus";
   projectAddBtnWrapper.addEventListener('click', () => {
     modalOpen();
-    createNewTask(modalContent);
+    createNewProject(modalContent);
   });
 
   projectAddBtnWrapper.appendChild(projectAddBtnIcon);
@@ -639,7 +633,7 @@ const displayRender = (() => {
   
   }
 
-  function createNewTask(modalOv){
+  function createNewProject(modalOv){
     let newProjectForm = document.createElement('form');
     newProjectForm.className = 'newProjectForm';
     let projectFormTitle = document.createElement('label');
@@ -648,18 +642,27 @@ const displayRender = (() => {
     let projectFormTitleIn = document.createElement('input');
     projectFormTitleIn.className = 'projectFormTitleIn';
     let projectFormSubmitBtn = document.createElement('button');
+    projectFormSubmitBtn.innerText = 'Create Project'
     projectFormSubmitBtn.className = 'projectFormSubmitBtn';
     newProjectForm.addEventListener('submit', (event) => {
       event.preventDefault();
       console.log(projectList.projectCounter);
       console.log(projectList);
       let projectWrapped = projectList.projectListObject[`proj${++projectList.projectCounter}`] = projectItem(`${projectFormTitleIn.value}`, {}, projectList.projectCounter);
+      
       pushProject(renderProjListItem(projectWrapped));
+      changeCurrentProject(projectWrapped);
+      renderProj(currentProject);
+      modalClose()
     });    
     newProjectForm.appendChild(projectFormTitle);
     newProjectForm.appendChild(projectFormTitleIn);
     newProjectForm.appendChild(projectFormSubmitBtn);
     modalOv.appendChild(newProjectForm);
+  }
+
+  function editProjectTitle(modalOv){
+    
   }
 
   return {
