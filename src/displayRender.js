@@ -77,6 +77,10 @@ const displayRender = (() => {
   const projectAddBtnIcon = document.createElement("i");
   projectAddBtnIcon.className = "fas fa-folder-plus";
   projectAddBtnWrapper.addEventListener('click', () => {
+    projectModalContainer.style.width = "0";
+    projectModalContent.style.opacity = "0";
+    projectModalContent.style.pointerEvents = "none";
+    projectModalCloseBtn.style.marginLeft = "0";
     modalOpen();
     createNewProject(modalContent);
   });
@@ -99,6 +103,10 @@ const displayRender = (() => {
     projItemWrapper.className = "projItemWrapper";
     projItemWrapper.addEventListener("click", () => {
       console.log("clickAZ");
+      projectModalContainer.style.width = "0";
+      projectModalContent.style.opacity = "0";
+      projectModalContent.style.pointerEvents = "none";
+      projectModalCloseBtn.style.marginLeft = "0";
       let foundProj = Object.keys(projectList.projectListObject).find(
         (key) =>
           projectList.projectListObject[key]["projId"] ==
@@ -362,16 +370,21 @@ const displayRender = (() => {
     leftWrapper.appendChild(taskTitle);
     let metaWrapper = document.createElement("div");
     metaWrapper.className = "metaWrapper";
+    leftWrapper.appendChild(taskDesc);
     metaWrapper.appendChild(taskPriorityWrapper);
     metaWrapper.appendChild(taskDueDateWrapper);
     leftWrapper.appendChild(metaWrapper);
 
     // Append of all wrappers
     taskItemWrapper.appendChild(leftWrapper);
-    taskItemWrapper.appendChild(taskDesc);
     taskItemWrapper.appendChild(rightIconsWrapper);
-
-    // console.log(taskItemWrapper);
+    taskItemWrapper.addEventListener('click', () =>{
+      if (taskDesc.style.display === 'none'){
+        taskDesc.style.display = 'flex';
+      } else {
+        taskDesc.style.display = 'none';
+      }
+    })
     return taskItemWrapper;
   }
 
