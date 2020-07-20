@@ -375,16 +375,31 @@ const displayRender = (() => {
     metaWrapper.appendChild(taskDueDateWrapper);
     leftWrapper.appendChild(metaWrapper);
 
-    // Append of all wrappers
-    taskItemWrapper.appendChild(leftWrapper);
-    taskItemWrapper.appendChild(rightIconsWrapper);
-    taskItemWrapper.addEventListener('click', () =>{
+    // Expand Button to show desc
+    let expandBtn = document.createElement('button');
+    let expandBtnIcon = document.createElement('i');
+    expandBtn.className = 'expandBtn';
+    expandBtnIcon.className = 'fas fa-angle-double-down';
+    expandBtn.appendChild(expandBtnIcon);
+    expandBtn.addEventListener('click', () =>{
       if (taskDesc.style.display === 'none'){
         taskDesc.style.display = 'flex';
       } else {
         taskDesc.style.display = 'none';
       }
-    })
+      if (expandBtnIcon.classList.contains('fa-angle-double-down')){
+        expandBtnIcon.classList.remove('fa-angle-double-down');
+        expandBtnIcon.classList.add('fa-angle-double-right');
+      } else {
+        expandBtnIcon.classList.remove('fa-angle-double-right');
+        expandBtnIcon.classList.add('fa-angle-double-down');
+      }
+    });
+    rightIconsWrapper.appendChild(expandBtn);
+    // Append of all wrappers
+    taskItemWrapper.appendChild(leftWrapper);
+    taskItemWrapper.appendChild(rightIconsWrapper);
+ 
     return taskItemWrapper;
   }
 

@@ -77,15 +77,16 @@ font-size: 10px;
 
 .taskDesc{
     display: none;
-    padding-top: 8px;
+    padding-top: 4px;
     opacity: 1;
     transition: 0.5s;
     font-size: 12px;
     text-overflow: ellipsis; 
-    padding-bottom: 8px;
-    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-right: 4px;
     color: #787878;
     pointer-events: none;
+    
 }
 
 .taskMoreBtn{
@@ -102,6 +103,22 @@ font-size: 10px;
     width: 20px;
     background-color: transparent;
     height: 20px;
+}
+
+.expandBtn{
+    border: 0;
+    width: 18px;
+    background-color: transparent;
+    height: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.fa-angle-double-down{
+    pointer-events: none;
+    color: #46529D;
+    font-size: 18px;
+    margin-left: 10px;
 }
 
 
@@ -141,6 +158,9 @@ font-size: 18px;
 .rightIconsWrapper{
     padding-right: 10px;
     display: flex;
+    justify-content: space-between;
+    min-width: 100px;
+    align-items: center;
 }
 
 .leftWrapper{
