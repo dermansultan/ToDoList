@@ -2,8 +2,12 @@ import taskItem from './toDoTaskItem'
 import projectList from './projectsList'
 import projectItem from './projectItem'
 import displayRender from './displayRender'
-import './style.css';
+import './style.css'
 import '@fortawesome/fontawesome-free/js/all.js'
+
+export function updateLocalStorage(){
+    localStorage.setItem('projectListObject', JSON.stringify(projectList.projectListObject));
+}
 
 const project1 = projectItem('Default Project', {}, projectList.projectCounter++);
 const project2 = projectItem('Default Project2', {}, projectList.projectCounter++);

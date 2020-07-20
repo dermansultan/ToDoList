@@ -1,10 +1,14 @@
 import { format } from "date-fns";
 import taskItem from "./toDoTaskItem";
 import projectList from "./projectsList";
-import { getCurrentProject, changeCurrentProject, currentProject } from "./index";
+import { getCurrentProject, changeCurrentProject, currentProject, updateLocalStorage } from "./index";
 import projectItem from "./projectItem";
 const displayRender = (() => {
   // create the project container based off of what the project object is...
+
+  function TaskItemcompleteToggle(obj){
+    obj.completed = !obj.completed;
+ }
 
   function modalOpen() {
     console.log("the modal should open now...");
@@ -315,9 +319,10 @@ const displayRender = (() => {
         currentProject.tasksList,
         taskItemWrapper.dataset.taskwrapperid
       );
-      currentProject.tasksList[`${taskKey}`].completeTaskItemToggle(
-        currentProject.tasksList[`${taskKey}`]
-      );
+      let foundObj = currentProject.tasksList[`${taskKey}`]
+      console.log(typeof foundObj)
+      TaskItemcompleteToggle(foundObj);
+      updateLocalStorage();
       console.log(currentProject.tasksList);
       pushTask(
         taskItemWrapper,
@@ -339,6 +344,7 @@ const displayRender = (() => {
       );
       delete currentProject.tasksList[`${taskKey}`];
       console.log(currentProject.tasksList);
+      updateLocalStorage();
       deleteTaskDom(taskItemWrapper.dataset.taskwrapperid, taskItemWrapper);
     });
 
@@ -525,6 +531,7 @@ const displayRender = (() => {
         currentProject.tasksList[`task${currentProject.taskCounter}`].completed
       );
       console.log(currentProject.tasksList);
+      updateLocalStorage();
       modalClose();
     });
 
@@ -657,8 +664,8 @@ const displayRender = (() => {
     modalOv.appendChild(taskFormDateWrapper);
     modalOv.appendChild(taskFormPrWrapper);
     modalOv.appendChild(submitBtn);
-  
-  
+    updateLocalStorage();
+
   }
 
   function createNewProject(modalOv){
@@ -677,11 +684,12 @@ const displayRender = (() => {
       console.log(projectList.projectCounter);
       console.log(projectList);
       let projectWrapped = projectList.projectListObject[`proj${++projectList.projectCounter}`] = projectItem(`${projectFormTitleIn.value}`, {}, projectList.projectCounter);
-      
       pushProject(renderProjListItem(projectWrapped));
+      updateLocalStorage();
+      console.log(projectList.projectListObject);
       changeCurrentProject(projectWrapped);
       renderProj(currentProject);
-      modalClose()
+      modalClose();
     });    
     newProjectForm.appendChild(projectFormTitle);
     newProjectForm.appendChild(projectFormTitleIn);
