@@ -5,9 +5,6 @@ import displayRender from './displayRender'
 import './style.css'
 import '@fortawesome/fontawesome-free/js/all.js'
 
-export function updateLocalStorage(){
-    localStorage.setItem('projectListObject', JSON.stringify(projectList.projectListObject));
-}
 
 const project1 = projectItem('Default Project', {}, projectList.projectCounter++);
 const project2 = projectItem('Default Project2', {}, projectList.projectCounter++);
@@ -39,7 +36,7 @@ project2.tasksList.task3 = item8;
 
 
 
-export let currentProject = projectList.projectListObject[Object.keys(projectList.projectListObject)[0]];
+export let currentProject = JSON.parse(localStorage.getItem('currentProject')) || projectList.projectListObject[Object.keys(projectList.projectListObject)[0]];
 
 export function getCurrentProject(){
     return currentProject
@@ -47,9 +44,14 @@ export function getCurrentProject(){
 
 export function changeCurrentProject(obj){ 
     currentProject = obj; 
+    localStorage.setItem('currentProject', JSON.stringify(currentProject)); 
 }
 // let currentProject = projectList.projectListObject[Object.keys(projectList.projectListObject)[0]];
 
+export function updateLocalStorage(){
+    localStorage.setItem('projectListObject', JSON.stringify(projectList.projectListObject));
+    localStorage.setItem('currentProject', JSON.stringify(currentProject));
+}
 
 // Give user a default Project
 displayRender.renderProj(currentProject);
