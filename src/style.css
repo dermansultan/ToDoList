@@ -275,8 +275,8 @@ border-radius: 35px;
     justify-content: flex-start;
     align-items: center;
     background-color: white;
-    width: 300px;
-    height: 200px;
+    min-width: 250px;
+    min-height: 125px;
     border-radius: 10px;
 }
 
@@ -284,6 +284,61 @@ border-radius: 35px;
     display: flex;
     margin-top: 15px;
     flex-direction: column;
+}
+
+.taskForm{
+    height: 300px;
+}
+
+
+.taskFormTitleLbl{
+    color: #46529D;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.taskFormDateLbl{
+    color: #46529D;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.submitBtn{
+    border: 0;
+border-radius: 5px;
+background-color: #2EBAEE;
+color: white;
+font-size: 12px;
+width: 150px;
+font-weight: 800;
+height: 25px;
+}
+
+.taskFormDescLbl{
+    color: #46529D;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.taskFormTitleIn{
+    height: 30px;
+    border: 1px solid #46529D;
+    border-radius: 5px;
+    padding-left: 5px;
+}
+
+.taskFormDescIn{
+    height: 30px;
+    border: 1px solid #46529D;
+    border-radius: 5px;
+    padding-left: 5px;
+}
+
+.taskFormDateIn{
+    height: 30px;
+    border: 1px solid #46529D;
+    border-radius: 5px;
+    padding-left: 5px;
 }
 
 .taskFormDescWrapper{
@@ -376,7 +431,35 @@ border-radius: 35px;
     width: 100px;
 }
 
+/* Adding a new Project Selectors */
+
 .newProjectForm{
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
+}
+
+.projectFormTitle{
+    color: #46529D;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.projectFormTitleIn{
+    margin-top: 10px;
+    height: 30px;
+    border: 1px solid #46529D;
+    border-radius: 5px;
+    padding-left: 5px;
+}
+
+.projectFormSubmitBtn{
+border: 0;
+border-radius: 5px;
+background-color: #2EBAEE;
+color: white;
+font-size: 12px;
+width: 150px;
+font-weight: 800;
+height: 25px;
 }

@@ -1,8 +1,6 @@
-import { format } from "date-fns";
-import taskItem from "./toDoTaskItem";
 import projectList from "./projectsList";
 import { getCurrentProject, changeCurrentProject, currentProject, updateLocalStorage } from "./index";
-import projectItem from "./projectItem";
+import { modalOpen, modalContentTask, modalContentEditTask, createNewProject} from "./modal"
 const displayRender = (() => {
   // create the project container based off of what the project object is...
 
@@ -10,13 +8,7 @@ const displayRender = (() => {
     obj.completed = !obj.completed;
  }
 
-  function modalOpen() {
-    console.log("the modal should open now...");
-    modalOverlay.style.visibility = "visible";
-  }
-
   // Pre rendered HTML elements
-
   // Hamburger Nav 
   let projectDetailsWrapper = document.getElementById('projectDetailsWrapper');
   projectDetailsWrapper.className = "projectDetailsWrapper";
@@ -143,17 +135,13 @@ const displayRender = (() => {
     });
   }
 
-  function modalClose() {
-    modalOverlay.style.visibility = "hidden";
-    modalContent.textContent = "";
-  }
 
   // click out modal reset modal content
   window.addEventListener("click", function (event) {
     if (event.target == modalOverlay) {
-      modalOverlay.style.visibility = "hidden";
-      modalContent.textContent = "";
-    }
+        modalOverlay.style.visibility = "hidden";
+        modalContent.textContent = "";
+  }
   });
 
   modalOverlay.appendChild(modalContent);
@@ -179,9 +167,6 @@ const displayRender = (() => {
     }
   }
 
-  function pushProject(projLi){
-    projectModalContentList.appendChild(projLi);
-  }
 
   function renderProjectItem(obj) {
 
@@ -428,280 +413,11 @@ const displayRender = (() => {
     renderTaskList(obj);
   }
 
-  // Creating a task
-  function modalContentTask(modalOv) {
-    let taskForm = document.createElement("form");
-    taskForm.className = "taskForm";
-
-    //  Title
-    let taskFormTitleWrapper = document.createElement("div");
-    taskFormTitleWrapper.className = "taskFormTitleWrapper";
-    let taskFormTitleLbl = document.createElement("label");
-    taskFormTitleLbl.className = "taskFormTitleLbl";
-    taskFormTitleLbl.innerText = "Task";
-    let taskFormTitleIn = document.createElement("input");
-    taskFormTitleIn.className = "taskFormTitleIn";
-    taskFormTitleIn.placeholder = "Name your task";
-    taskFormTitleIn.required = true;
-    taskFormTitleWrapper.appendChild(taskFormTitleLbl);
-    taskFormTitleWrapper.appendChild(taskFormTitleIn);
-
-    //  Desc
-    let taskFormDescWrapper = document.createElement("div");
-    taskFormDescWrapper.className = "taskFormDescWrapper";
-    let taskFormDescLbl = document.createElement("label");
-    taskFormDescLbl.className = "taskFormDescLbl";
-    taskFormDescLbl.innerText = "Description";
-    let taskFormDescIn = document.createElement("input");
-    taskFormDescIn.className = "taskFormDescIn";
-    taskFormDescIn.placeholder = "Describe the task";
-    taskFormDescIn.required = true;
-    taskFormDescWrapper.appendChild(taskFormDescLbl);
-    taskFormDescWrapper.appendChild(taskFormDescIn);
-
-    // Date Due
-    let taskFormDateWrapper = document.createElement("div");
-    taskFormDateWrapper.className = "taskFormDateWrapper";
-    let taskFormDateLbl = document.createElement("label");
-    taskFormDateLbl.innerText = "Date";
-    taskFormDateLbl.className = "taskFormDateLbl";
-    let taskFormDateIn = document.createElement("input");
-    taskFormDateIn.className = "taskFormDateIn";
-    let today = new Date();
-    taskFormDateIn.value = today.toISOString().substr(0, 10);
-    taskFormDateIn.type = "date";
-    taskFormDateIn.required = true;
-    taskFormDateWrapper.appendChild(taskFormDateLbl);
-    taskFormDateWrapper.appendChild(taskFormDateIn);
-
-    //  Priority
-    let taskFormPrWrapper = document.createElement("div");
-    taskFormPrWrapper.className = "taskFormPrWrapper";
-    let taskFormPrChoiceWrapper = document.createElement("div");
-    taskFormPrChoiceWrapper.className = "taskforPrChoiceWrapper";
-
-    let taskFormPrLbl = document.createElement("label");
-    taskFormPrLbl.innerText = "Priority";
-
-    let taskFormPrSlct = document.createElement("select");
-    taskFormPrSlct.required = true;
-    taskFormPrSlct.class = "taskFormPrSlct";
-
-    let lowOption = document.createElement("option");
-    lowOption.innerText = "Low";
-    let medOption = document.createElement("option");
-    medOption.innerText = "Medium";
-    let highOption = document.createElement("option");
-    highOption.innerText = "High";
-
-    taskFormPrSlct.appendChild(lowOption);
-    taskFormPrSlct.appendChild(medOption);
-    taskFormPrSlct.appendChild(highOption);
-
-    taskFormPrChoiceWrapper.appendChild(taskFormPrLbl);
-    taskFormPrChoiceWrapper.appendChild(taskFormPrSlct);
-    taskFormPrWrapper.appendChild(taskFormPrChoiceWrapper);
-
-    // submit button
-    let submitBtn = document.createElement("input");
-    submitBtn.type = "submit";
-    submitBtn.className = "submitBtn";
-    submitBtn.innerText = "create";
-    taskForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      currentProject.tasksList[
-        `task${++currentProject.taskCounter}`
-      ] = taskItem(
-        `${taskFormTitleIn.value}`,
-        `${taskFormDescIn.value}`,
-        `${format(
-          taskFormDateIn.valueAsDate.setDate(
-            taskFormDateIn.valueAsDate.getDate() + 1
-          ),
-          "MMM do yyyy"
-        )}`,
-        `${taskFormPrSlct.value}`,
-        false,
-        currentProject.taskCounter
-      );
-      pushTask(
-        renderTaskItem(
-          currentProject.tasksList[`task${currentProject.taskCounter}`]
-        ),
-        currentProject.tasksList[`task${currentProject.taskCounter}`].completed
-      );
-      console.log(currentProject.tasksList);
-      updateLocalStorage();
-      modalClose();
-    });
-
-    taskForm.appendChild(taskFormTitleWrapper);
-    taskForm.appendChild(taskFormDescWrapper);
-    taskForm.appendChild(taskFormDateWrapper);
-    taskForm.appendChild(taskFormPrWrapper);
-    taskForm.appendChild(submitBtn);
-    modalOv.appendChild(taskForm);
-  }
-
-  // Editing a task
-  function modalContentEditTask(modalOv, taskKey) {
-    let taskForm = document.createElement("form");
-    taskForm.className = "taskForm";
-    console.log(taskKey);
-    let taskObj = currentProject.tasksList[`${taskKey}`];
-
-    //  Title
-    let taskFormTitleWrapper = document.createElement("div");
-    taskFormTitleWrapper.className = "taskFormTitleWrapper";
-    let taskFormTitleLbl = document.createElement("label");
-    taskFormTitleLbl.className = "taskFormTitleLbl";
-    taskFormTitleLbl.innerText = "Task";
-    let taskFormTitleIn = document.createElement("input");
-    taskFormTitleIn.className = "taskFormTitleIn";
-    taskFormTitleIn.value = `${taskObj.title}`;
-    taskFormTitleWrapper.appendChild(taskFormTitleLbl);
-    taskFormTitleWrapper.appendChild(taskFormTitleIn);
-
-    //  Desc
-    let taskFormDescWrapper = document.createElement("div");
-    taskFormDescWrapper.className = "taskFormDescWrapper";
-    let taskFormDescLbl = document.createElement("label");
-    taskFormDescLbl.className = "taskFormDescLbl";
-    taskFormDescLbl.innerText = "Description";
-    let taskFormDescIn = document.createElement("input");
-    taskFormDescIn.className = "taskFormDescIn";
-    taskFormDescIn.value = `${taskObj.desc}`;
-    taskFormDescWrapper.appendChild(taskFormDescLbl);
-    taskFormDescWrapper.appendChild(taskFormDescIn);
-
-    // Date Due
-    let taskFormDateWrapper = document.createElement("div");
-    taskFormDateWrapper.className = "taskFormDateWrapper";
-    let taskFormDateLbl = document.createElement("label");
-    taskFormDateLbl.innerText = "Date";
-    taskFormDateLbl.className = "taskFormDateLbl";
-    let taskFormDateIn = document.createElement("input");
-    taskFormDateIn.className = "taskFormDateIn";
-    taskFormDateIn.type = "date";
-    let today = new Date();
-    taskFormDateIn.value = today.toISOString().substr(0, 10);
-    taskFormDateWrapper.appendChild(taskFormDateLbl);
-    taskFormDateWrapper.appendChild(taskFormDateIn);
-
-    //  Priority
-    let taskFormPrWrapper = document.createElement("div");
-    taskFormPrWrapper.className = "taskFormPrWrapper";
-    let taskFormPrChoiceWrapper = document.createElement("div");
-    taskFormPrChoiceWrapper.className = "taskforPrChoiceWrapper";
-
-    let taskFormPrLbl = document.createElement("label");
-    taskFormPrLbl.innerText = "Priority";
-
-    let taskFormPrSlct = document.createElement("select");
-    taskFormPrSlct.class = "taskFormPrSlct";
-
-    let defOption = document.createElement("option");
-    defOption.innerText = "Select Priority";
-    defOption.selected = "selected";
-    defOption.disabled = "disabled";
-
-    let lowOption = document.createElement("option");
-    lowOption.innerText = "Low";
-    let medOption = document.createElement("option");
-    medOption.innerText = "Medium";
-    let highOption = document.createElement("option");
-    highOption.innerText = "High";
-
-    taskFormPrSlct.appendChild(defOption);
-    taskFormPrSlct.appendChild(lowOption);
-    taskFormPrSlct.appendChild(medOption);
-    taskFormPrSlct.appendChild(highOption);
-
-    taskFormPrChoiceWrapper.appendChild(taskFormPrLbl);
-    taskFormPrChoiceWrapper.appendChild(taskFormPrSlct);
-    taskFormPrWrapper.appendChild(taskFormPrChoiceWrapper);
-
-    // submit button
-    let submitBtn = document.createElement("input");
-    submitBtn.className = "submitBtn";
-    submitBtn.innerText = "create";
-    submitBtn.type = "submit";
-    submitBtn.addEventListener("click", () => {
-      // replaces already existing key with:
-      currentProject.tasksList[`${taskKey}`] = taskItem(
-        `${taskFormTitleIn.value}`,
-        `${taskFormDescIn.value}`,
-        `${format(
-          taskFormDateIn.valueAsDate.setDate(
-            taskFormDateIn.valueAsDate.getDate() + 1
-          ),
-          "MMM do yyyy"
-        )}`,
-        `${taskFormPrSlct.value}`,
-        false,
-        taskObj.id
-      );
-      let wrapper = document.getElementById(`${taskObj.id}`);
-      console.log(wrapper);
-      wrapper.querySelector(
-        ".taskTitle"
-      ).innerText = `${taskFormTitleIn.value}`;
-      wrapper.querySelector(".taskDesc").innerText = `${taskFormDescIn.value}`;
-      wrapper.querySelector(
-        ".taskPriority"
-      ).innerText = `${taskFormPrSlct.value}`;
-      wrapper.querySelector(".taskDueDate").innerText = `${format(
-        taskFormDateIn.valueAsDate.setDate(
-          taskFormDateIn.valueAsDate.getDate() + 1
-        ),
-        "MMM do yyyy"
-      )}`;
-      modalClose();
-    });
-
-    modalOv.appendChild(taskFormTitleWrapper);
-    modalOv.appendChild(taskFormDescWrapper);
-    modalOv.appendChild(taskFormDateWrapper);
-    modalOv.appendChild(taskFormPrWrapper);
-    modalOv.appendChild(submitBtn);
-    updateLocalStorage();
-
-  }
-
-  function createNewProject(modalOv){
-    let newProjectForm = document.createElement('form');
-    newProjectForm.className = 'newProjectForm';
-    let projectFormTitle = document.createElement('label');
-    projectFormTitle.className = 'projectFormTitle';
-    projectFormTitle.innerText = 'Project Title'
-    let projectFormTitleIn = document.createElement('input');
-    projectFormTitleIn.className = 'projectFormTitleIn';
-    let projectFormSubmitBtn = document.createElement('button');
-    projectFormSubmitBtn.innerText = 'Create Project'
-    projectFormSubmitBtn.className = 'projectFormSubmitBtn';
-    newProjectForm.addEventListener('submit', (event) => {
-      event.preventDefault();
-      console.log(projectList.projectCounter);
-      console.log(projectList);
-      let projectWrapped = projectList.projectListObject[`proj${++projectList.projectCounter}`] = projectItem(`${projectFormTitleIn.value}`, {}, projectList.projectCounter);
-      pushProject(renderProjListItem(projectWrapped));
-      updateLocalStorage();
-      console.log(projectList.projectListObject);
-      changeCurrentProject(projectWrapped);
-      renderProj(currentProject);
-      modalClose();
-    });    
-    newProjectForm.appendChild(projectFormTitle);
-    newProjectForm.appendChild(projectFormTitleIn);
-    newProjectForm.appendChild(projectFormSubmitBtn);
-    modalOv.appendChild(newProjectForm);
-  }
-
-  function editProjectTitle(modalOv){
-    
-  }
-
   return {
+    modalContent,
+    modalOverlay,
+    projectModalContentList,
+    pushTask,
     renderTaskList,
     renderTaskItem,
     renderProjectItem,
