@@ -8,6 +8,7 @@ import '@fortawesome/fontawesome-free/js/all.js'
 
 const project1 = projectItem('Default Project', {}, projectList.projectCounter++);
 projectList.projectListObject["proj1"] = project1;
+
 //project1
 const item1 = taskItem('Make dinner', `Find the best recipe ever created because it has to be yummy.`, '01/01/2020', 'Low', false, ++project1.taskCounter);
 const item2 = taskItem('Take out Garbage', 'Collect the recycling and the garbage and put it out on the drive way.', 'TBA', 'Medium', false, ++project1.taskCounter);
