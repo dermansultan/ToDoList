@@ -15,10 +15,12 @@ body {
 .projectTitle{
     color: #46529D;
     font-size: 24px;
+    max-width: 200px;
     overflow:hidden;
     display:inline-block;
     white-space: nowrap;
-    text-overflow: ellipsis; 
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .projectTitleWrapper{
@@ -416,10 +418,13 @@ height: 25px;
     font-size: 15px;
     color: #46529D;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .projItemWrapper{
     display: flex;
+    max-width: 192px;
     margin-left: 15px;
     align-items: center;
 }
