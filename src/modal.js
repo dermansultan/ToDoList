@@ -15,6 +15,34 @@ function modalOpen() {
     displayRender.modalOverlay.style.visibility = "visible";
   }
 
+  function modalContentEditProj(modalOv){
+let editProjForm = document.createElement('form');
+editProjForm.className = 'editProjForm';
+let projectFormTitle = document.createElement('label');
+    projectFormTitle.className = 'projectFormTitle';
+    projectFormTitle.innerText = 'Project Title'
+    let projectFormTitleIn = document.createElement('input');
+    projectFormTitleIn.className = 'projectFormTitleIn';
+    let projectFormSubmitBtn = document.createElement('button');
+    projectFormSubmitBtn.innerText = 'Create Project'
+    projectFormSubmitBtn.className = 'projectFormSubmitBtn';
+    editProjForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      currentProject.projTitle = `${projectFormTitleIn.value}`;
+      console.log(currentProject);
+      updateLocalStorage();
+      modalClose();
+      // Update List of Projects to change name as well. 
+      displayRender.renderProj(currentProject);
+      displayRender.projectModalContentList.innerText = '';
+      displayRender.renderProjList(projectList);
+    });    
+    editProjForm.appendChild(projectFormTitle);
+    editProjForm.appendChild(projectFormTitleIn);
+    editProjForm.appendChild(projectFormSubmitBtn);
+    modalOv.appendChild(editProjForm);
+  }
+
     // Creating a task
     function modalContentTask(modalOv) {
         let taskForm = document.createElement("form");
@@ -254,7 +282,7 @@ function modalOpen() {
     updateLocalStorage();
 
   }
-
+  // Creating a new project
   function createNewProject(modalOv){
     let newProjectForm = document.createElement('form');
     newProjectForm.className = 'newProjectForm';
@@ -303,4 +331,4 @@ function modalOpen() {
     container.style.pointerEvents = "auto";
   }
 
-  export { modalOpen, modalContentTask, modalContentEditTask, createNewProject, pushProject, projectModalClose, projectModalOpen }
+  export { modalOpen, modalContentTask, modalContentEditTask, createNewProject, pushProject, projectModalClose, projectModalOpen, modalContentEditProj}

@@ -1,6 +1,6 @@
 import projectList from "./projectsList";
 import { getCurrentProject, changeCurrentProject, currentProject, updateLocalStorage } from "./index";
-import { modalOpen, modalContentTask, modalContentEditTask, createNewProject} from "./modal"
+import { modalOpen, modalContentTask, modalContentEditTask, createNewProject, modalContentEditProj, pushEditedProject} from "./modal"
 const displayRender = (() => {
   // create the project container based off of what the project object is...
 
@@ -35,6 +35,11 @@ const displayRender = (() => {
   projectTitleWrapper.className = "projectTitleWrapper";
   projectTitleWrapper.appendChild(projectTitle);
   projectDetailsWrapper.appendChild(projectTitleWrapper);
+  projectTitleWrapper.addEventListener('click', () => {
+    console.log('click');
+    modalOpen();
+    modalContentEditProj(modalContent);
+  });
   let emptyDiv = document.createElement("div");
   emptyDiv.className = "empty";
   projectDetailsWrapper.appendChild(hamIconWrapper);
