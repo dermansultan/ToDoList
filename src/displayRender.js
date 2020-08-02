@@ -8,6 +8,13 @@ const displayRender = (() => {
     obj.completed = !obj.completed;
  }
 
+
+ // Takes object and returns true if length is 0
+ function isEmpty(obj){
+  return Object.keys(obj).length === 0;
+ }
+
+
   // Pre rendered HTML elements
   // Hamburger Nav 
   let projectDetailsWrapper = document.getElementById('projectDetailsWrapper');
@@ -172,32 +179,7 @@ const displayRender = (() => {
     }
   }
 
-
-  function renderProjectItem(obj) {
-
-    document.querySelector('.projectTitle').innerText = `${obj.projTitle}`;
-
-    // Completed Div Creation:
-    const completedDivWrapper = document.createElement("div");
-    completedDivWrapper.className = "completedDivWrapper";
-    let completedDivIcon = document.createElement("i");
-    completedDivIcon.className = "fas fa-check-double";
-    completedDivIcon.style.color = "#46529D";
-    const completedDivTitle = document.createElement("h1");
-    completedDivTitle.className = "completedTitle";
-    completedDivTitle.innerText = "Completed Items:";
-    completedDiv.className = "completedDiv";
-    completedDivWrapper.appendChild(completedDivIcon);
-    completedDivWrapper.appendChild(completedDivTitle);
-    completedDiv.appendChild(completedDivWrapper);
-    modalsContainer.appendChild(addItemBtnWrapper);
-
-    addItemBtnWrapper.addEventListener("click", function () {
-      modalContent.textContent = '';
-      modalOpen();
-      modalContentTask(modalContent);
-    });
-
+  // Make Current and Completed Div Prerendered: 
     // Current Div Wrapper Creation:
     const currentDivWrapper = document.createElement("div");
     currentDivWrapper.className = "currentDivWrapper";
@@ -207,16 +189,51 @@ const displayRender = (() => {
     const currentDivTitle = document.createElement("h1");
     currentDivTitle.className = "currentTitle";
     currentDivTitle.innerText = "Current Items:";
-    currentDiv.className = "currentDiv";
+    currentDiv.className = "currentDivList";
     currentDivWrapper.appendChild(currentDivIcon);
     currentDivWrapper.appendChild(currentDivTitle);
-    currentDiv.appendChild(currentDivWrapper);
+
+    const completedDivWrapper = document.createElement("div");
+    completedDivWrapper.className = "completedDivWrapper";
+    let completedDivIcon = document.createElement("i");
+    completedDivIcon.className = "fas fa-check-double";
+    completedDivIcon.style.color = "#46529D";
+    const completedDivTitle = document.createElement("h1");
+    completedDivTitle.className = "completedTitle";
+    completedDivTitle.innerText = "Completed Items:";
+    completedDiv.className = "completedDivList";
+    completedDivWrapper.appendChild(completedDivIcon);
+    completedDivWrapper.appendChild(completedDivTitle);
+    modalsContainer.appendChild(addItemBtnWrapper);
 
     projectDetailsWrapper.appendChild(projectTitleWrapper);
     projectDetailsWrapper.appendChild(emptyDiv);
+    projectContainer.appendChild(currentDivWrapper);
     projectContainer.appendChild(currentDiv);
+    projectContainer.appendChild(completedDivWrapper);
     projectContainer.appendChild(completedDiv);
+
+
+  function renderProjectItem(obj) {
+
+    document.querySelector('.projectTitle').innerText = `${obj.projTitle}`;
+    addItemBtnWrapper.addEventListener("click", function () {
+      modalContent.textContent = '';
+      modalOpen();
+      modalContentTask(modalContent);
+    });
+
   }
+
+  // function emptyTasksDiv(){
+  //   // changes dom render to empty on current and completed divs when empty
+  //   if (currentDivWrapper.textContent = '') {
+  //     currentDiv.style.display = 'none';
+  //   } else if ( completedDivWrapper.textContent = ''){
+  //     completedDiv.style.display = 'none';
+  //   }
+  // }
+
 
   //move this to another logic based module:
   // finds the object in the list with the same id
@@ -408,6 +425,12 @@ const displayRender = (() => {
       let item = renderTaskItem(tasksListObject[element]);
       pushTask(item, tasksListObject[element].completed);
     });
+
+    if (isEmpty(tasksListObject))
+    {
+      completedDivWrapper.style.display = 'none';
+      currentDivWrapper.style.display = 'none';
+    }
   }
 
   function renderProj(obj) {
@@ -419,6 +442,7 @@ const displayRender = (() => {
   }
 
   return {
+    isEmpty,
     modalContent,
     modalOverlay,
     projectModalContentList,
