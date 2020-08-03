@@ -1,6 +1,7 @@
 import projectList from "./projectsList";
 import { getCurrentProject, changeCurrentProject, currentProject, updateLocalStorage } from "./index";
 import { modalOpen, modalContentTask, modalContentEditTask, createNewProject, modalContentEditProj, pushEditedProject} from "./modal"
+import taskItem from "./toDoTaskItem";
 const displayRender = (() => {
   // create the project container based off of what the project object is...
 
@@ -12,6 +13,23 @@ const displayRender = (() => {
  // Takes object and returns true if length is 0
  function isEmpty(obj){
   return Object.keys(obj).length === 0;
+ }
+
+ function getTasksCount(obj){
+  let completedTaskCount = 0;
+  let currentTaskCount = 0; 
+  Object.keys(obj).forEach(function(taskItem){
+    console.log(taskItem);
+     if (obj[`${taskItem}`].completed == true){
+      completedTaskCount++;
+      console.log(`${taskItem} is completed`)
+     } else if (obj[`${taskItem}`].completed == false){
+       currentTaskCount++;
+       console.log(`${taskItem} is not completed`)
+     };
+   });
+   console.log(`Completed Tasks Count: ${completedTaskCount}`);
+   console.log(`Current Tasks Count: ${currentTaskCount}`);
  }
 
 
@@ -327,14 +345,15 @@ const displayRender = (() => {
         taskItemWrapper.dataset.taskwrapperid
       );
       let foundObj = currentProject.tasksList[`${taskKey}`]
-      console.log(typeof foundObj)
+      // console.log(typeof foundObj)
       TaskItemcompleteToggle(foundObj);
       updateLocalStorage();
-      console.log(currentProject.tasksList);
+      // console.log(currentProject.tasksList);
       pushTask(
         taskItemWrapper,
         currentProject.tasksList[`${taskKey}`].completed
       );
+      getTasksCount(currentProject.tasksList);
     });
 
     // Delete Btn
