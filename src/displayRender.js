@@ -22,14 +22,26 @@ const displayRender = (() => {
     console.log(taskItem);
      if (obj[`${taskItem}`].completed == true){
       completedTaskCount++;
-      console.log(`${taskItem} is completed`)
+      console.log(`${taskItem} is completed`);
      } else if (obj[`${taskItem}`].completed == false){
        currentTaskCount++;
-       console.log(`${taskItem} is not completed`)
+       console.log(`${taskItem} is not completed`);
      };
+     console.log(completedTaskCount, currentTaskCount);
    });
    console.log(`Completed Tasks Count: ${completedTaskCount}`);
    console.log(`Current Tasks Count: ${currentTaskCount}`);
+   if (completedTaskCount == 0){
+    completedDivWrapper.style.display = 'none';
+  }
+   else if (currentTaskCount == 0) {
+   currentDivWrapper.style.display = 'none';
+  } else {
+    currentDivWrapper.style.display = 'flex';
+    completedDivWrapper.style.display = 'flex';
+  }
+
+
  }
 
 
@@ -372,6 +384,7 @@ const displayRender = (() => {
       console.log(currentProject.tasksList);
       updateLocalStorage();
       deleteTaskDom(taskItemWrapper.dataset.taskwrapperid, taskItemWrapper);
+      getTasksCount(currentProject.tasksList);
     });
 
     //  Edit Btn
@@ -444,7 +457,7 @@ const displayRender = (() => {
       let item = renderTaskItem(tasksListObject[element]);
       pushTask(item, tasksListObject[element].completed);
     });
-
+    getTasksCount(tasksListObject);
     if (isEmpty(tasksListObject))
     {
       completedDivWrapper.style.display = 'none';
