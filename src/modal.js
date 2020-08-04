@@ -148,6 +148,7 @@ let projectFormTitle = document.createElement('label');
           console.log(currentProject.tasksList);
           updateLocalStorage();
           modalClose();
+          displayRender.getTasksCount(currentProject.tasksList);
         });
     
         taskForm.appendChild(taskFormTitleWrapper);

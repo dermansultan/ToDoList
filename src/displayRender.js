@@ -485,6 +485,7 @@ const displayRender = (() => {
     renderProj,
     renderProjListItem,
     renderProjList,
+    getTasksCount
   };
 })();
 
