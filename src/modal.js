@@ -160,7 +160,8 @@ let projectFormTitle = document.createElement('label');
         modalOv.appendChild(taskForm);
       }
 
-    function modalContentDelProj(modalOv){
+    function modalContentDelProj(modalOv, foundProj){
+      console.log(foundProj);
       let deleteProjContainer = document.createElement('div');
       deleteProjContainer.className = 'deleteProjContainer';
 
@@ -178,12 +179,10 @@ let projectFormTitle = document.createElement('label');
       yesBtn.value = 'Yes';
       yesBtn.addEventListener('click', () =>{
         console.log('yes was clicked');
-        let foundProj = Object.keys(projectList.projectListObject).find(
-          (key) =>
-            projectList.projectListObject[key]["projId"] ==
-            `${projItemWrapper.dataset.projwrapperid}`
-        );
-        console.log('foundProj');
+        delete projectList.projectListObject[`${foundProj}`];
+        // changeCurrentProject(`${Object.keys(projectList.projectListObject[0])}`);
+        console.log ('The Project List is:', projectList.projectListObject);
+        console.log('The current project is', currentProject);
       });
 
       let noBtn = document.createElement('input');

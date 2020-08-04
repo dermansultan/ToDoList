@@ -190,7 +190,10 @@ const displayRender = (() => {
       // Setup a Are you sure you would like to delete the project? Modal
       modalOpen();
       projectSideClose();
-      modalContentDelProj(modalContent);
+      modalContentDelProj(modalContent, Object.keys(projectList.projectListObject).find(
+        (key) =>
+          projectList.projectListObject[key]["projId"] ==
+          `${projItemWrapper.dataset.projwrapperid}`));
       console.log('clicked');
     });
 
