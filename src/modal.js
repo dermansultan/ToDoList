@@ -20,11 +20,12 @@ let editProjForm = document.createElement('form');
 editProjForm.className = 'editProjForm';
 let projectFormTitle = document.createElement('label');
     projectFormTitle.className = 'projectFormTitle';
-    projectFormTitle.innerText = 'Project Title'
+    projectFormTitle.innerText = 'Project Title';
     let projectFormTitleIn = document.createElement('input');
-    projectFormTitleIn.className = 'projectFormTitleIn';
+    projectFormTitleIn.placeholder = 'New Title';
+    projectFormTitleIn.value = `${currentProject.projTitle}`;
     let projectFormSubmitBtn = document.createElement('button');
-    projectFormSubmitBtn.innerText = 'Create Project'
+    projectFormSubmitBtn.innerText = 'Change Title'
     projectFormSubmitBtn.className = 'projectFormSubmitBtn';
     editProjForm.addEventListener('submit', (event) => {
       event.preventDefault();
@@ -318,18 +319,5 @@ let projectFormTitle = document.createElement('label');
     displayRender.projectModalContentList.appendChild(projLi);
   }
 
-  function projectModalClose(container){
-    container.style.width = "0";
-    container.style.opacity = "0";
-    container.style.pointerEvents = "none";
-    container.style.marginLeft = "0";
-  }
 
-  function projectModalOpen(container){
-    container.style.width = "50vw";
-    container.style.opacity = "1";
-    container.style.marginLeft = "50vw";
-    container.style.pointerEvents = "auto";
-  }
-
-  export { modalOpen, modalContentTask, modalContentEditTask, createNewProject, pushProject, projectModalClose, projectModalOpen, modalContentEditProj}
+  export { modalOpen, modalContentTask, modalContentEditTask, createNewProject, pushProject, modalContentEditProj}

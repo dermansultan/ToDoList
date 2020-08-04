@@ -1,9 +1,17 @@
 import projectList from "./projectsList";
 import { getCurrentProject, changeCurrentProject, currentProject, updateLocalStorage } from "./index";
-import { modalOpen, modalContentTask, modalContentEditTask, createNewProject, modalContentEditProj, pushEditedProject} from "./modal"
+import { modalOpen, modalContentTask, modalContentEditTask, createNewProject, modalContentEditProj} from "./modal"
 import taskItem from "./toDoTaskItem";
 const displayRender = (() => {
   // create the project container based off of what the project object is...
+
+  function projectSideClose(){
+    projectModalContainer.style.width = "0";
+    projectModalContent.style.opacity = "0";
+    projectModalContent.style.pointerEvents = "none";
+    projectModalCloseBtn.style.marginLeft = "0";
+  }
+  
 
   function TaskItemcompleteToggle(obj){
     obj.completed = !obj.completed;
@@ -57,9 +65,9 @@ const displayRender = (() => {
   hamIconWrapper.appendChild(hamIcon);
   // effects on modal
   hamIconWrapper.addEventListener("click", () => {
-    projectModalContainer.style.width = "50vw";
+    projectModalContainer.style.width = "65vw";
     projectModalContent.style.opacity = "1";
-    projectModalCloseBtn.style.marginLeft = "50vw";
+    projectModalCloseBtn.style.marginLeft = "65vw";
     projectModalContent.style.pointerEvents = "auto";
   });
 // Project Title Nav
@@ -103,10 +111,7 @@ const displayRender = (() => {
   const projectModalCloseBtnIcon = document.createElement("i");
   projectModalCloseBtnIcon.className = "fas fa-times-circle";
   projectModalCloseBtn.addEventListener("click", () => {
-    projectModalContainer.style.width = "0";
-    projectModalContent.style.opacity = "0";
-    projectModalContent.style.pointerEvents = "none";
-    projectModalCloseBtn.style.marginLeft = "0";
+    projectSideClose();
   });
   projectModalCloseBtn.appendChild(projectModalCloseBtnIcon);
 
@@ -115,10 +120,7 @@ const displayRender = (() => {
   const projectAddBtnIcon = document.createElement("i");
   projectAddBtnIcon.className = "fas fa-folder-plus";
   projectAddBtnWrapper.addEventListener('click', () => {
-    projectModalContainer.style.width = "0";
-    projectModalContent.style.opacity = "0";
-    projectModalContent.style.pointerEvents = "none";
-    projectModalCloseBtn.style.marginLeft = "0";
+    projectSideClose();
     modalOpen();
     createNewProject(modalContent);
   });
@@ -139,12 +141,18 @@ const displayRender = (() => {
     let projItemWrapper = document.createElement("li");
     projItemWrapper.dataset.projwrapperid = `${obj.projId}`;
     projItemWrapper.className = "projItemWrapper";
-    projItemWrapper.addEventListener("click", () => {
+  
+    // let projectItemIcon = document.createElement("i");
+    // projectItemIcon.className = "fas fa-folder";
+    // projItemWrapper.appendChild(projectItemIcon);
+
+    let projItemTitle = document.createElement("h2");
+    projItemTitle.innerText = `${obj.projTitle}`;
+    projItemTitle.className = "projItemTitle";
+    projItemWrapper.appendChild(projItemTitle);
+    projItemTitle.addEventListener("click", () => {
       console.log("clickAZ");
-      projectModalContainer.style.width = "0";
-      projectModalContent.style.opacity = "0";
-      projectModalContent.style.pointerEvents = "none";
-      projectModalCloseBtn.style.marginLeft = "0";
+      projectSideClose();
       let foundProj = Object.keys(projectList.projectListObject).find(
         (key) =>
           projectList.projectListObject[key]["projId"] ==
@@ -156,14 +164,35 @@ const displayRender = (() => {
       renderProj(currentProject);
     });
 
-    let projectItemIcon = document.createElement("i");
-    projectItemIcon.className = "fas fa-folder";
-    projItemWrapper.appendChild(projectItemIcon);
+    // Delete and Edit Icon
+    let projectItemEditIcon = document.createElement('i');
+    let projectItemEditBtn = document.createElement('button');
+    projectItemEditBtn.className = 'projectItemEditBtn';
+    let projectItemDelBtn = document.createElement('button');
+    let projectItemDelIcon = document.createElement('i');
+    projectItemDelBtn.className = 'projectItemDelBtn';
+    projectItemEditIcon.className = 'far fa-edit projWrapEditIcon';
+    projectItemDelIcon.className = 'far fa-trash-alt projWrapDelIcon';
 
-    let projItemTitle = document.createElement("h2");
-    projItemTitle.innerText = `${obj.projTitle}`;
-    projItemTitle.className = "projItemTitle";
-    projItemWrapper.appendChild(projItemTitle);
+    projectItemEditBtn.appendChild(projectItemEditIcon);
+    projectItemDelBtn.appendChild(projectItemDelIcon);
+
+    projItemWrapper.appendChild(projectItemEditBtn);
+    projItemWrapper.appendChild(projectItemDelBtn);
+
+    projectItemEditBtn.addEventListener('click', () =>{
+      modalOpen();
+      projectSideClose();
+      modalContentEditProj(modalContent);
+    });
+
+    projectItemDelBtn.addEventListener('click', () =>{
+      // Setup a Are you sure you would like to delete the project? Modal
+      console.log('clicked');
+    });
+
+
+
 
     return projItemWrapper;
   }
