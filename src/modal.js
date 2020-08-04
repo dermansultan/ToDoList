@@ -160,6 +160,48 @@ let projectFormTitle = document.createElement('label');
         modalOv.appendChild(taskForm);
       }
 
+    function modalContentDelProj(modalOv){
+      let deleteProjContainer = document.createElement('div');
+      deleteProjContainer.className = 'deleteProjContainer';
+
+      let deleteProjTitle = document.createElement('label')
+      deleteProjTitle.innerText = 'Are you sure you would like to delete this project?';
+      deleteProjTitle.className = 'deleteProjTitle';
+      deleteProjContainer.appendChild(deleteProjTitle);
+
+      let buttonsWrapper = document.createElement('div');
+      buttonsWrapper.className = 'buttonsWrapper';
+
+      let yesBtn = document.createElement('input');
+      yesBtn.className = 'yesBtn';
+      yesBtn.type = 'button';
+      yesBtn.value = 'Yes';
+      yesBtn.addEventListener('click', () =>{
+        console.log('yes was clicked');
+        let foundProj = Object.keys(projectList.projectListObject).find(
+          (key) =>
+            projectList.projectListObject[key]["projId"] ==
+            `${projItemWrapper.dataset.projwrapperid}`
+        );
+        console.log('foundProj');
+      });
+
+      let noBtn = document.createElement('input');
+      noBtn.className = 'noBtn';
+      noBtn.type = 'button';
+      noBtn.value = 'No';
+      noBtn.addEventListener('click', () =>{
+        modalClose();
+      });
+
+      buttonsWrapper.appendChild(yesBtn);
+      buttonsWrapper.appendChild(noBtn);
+      deleteProjContainer.appendChild(buttonsWrapper);
+
+      modalOv.appendChild(deleteProjContainer);
+
+    }
+
   // Editing a task
   function modalContentEditTask(modalOv, taskKey) {
     let taskForm = document.createElement("form");
@@ -320,4 +362,4 @@ let projectFormTitle = document.createElement('label');
   }
 
 
-  export { modalOpen, modalContentTask, modalContentEditTask, createNewProject, pushProject, modalContentEditProj}
+  export { modalOpen, modalContentTask, modalContentEditTask, createNewProject, pushProject, modalContentEditProj, modalContentDelProj}

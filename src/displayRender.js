@@ -1,6 +1,6 @@
 import projectList from "./projectsList";
 import { getCurrentProject, changeCurrentProject, currentProject, updateLocalStorage } from "./index";
-import { modalOpen, modalContentTask, modalContentEditTask, createNewProject, modalContentEditProj} from "./modal"
+import { modalOpen, modalContentTask, modalContentEditTask, createNewProject, modalContentEditProj, modalContentDelProj} from "./modal"
 import taskItem from "./toDoTaskItem";
 const displayRender = (() => {
   // create the project container based off of what the project object is...
@@ -188,6 +188,9 @@ const displayRender = (() => {
 
     projectItemDelBtn.addEventListener('click', () =>{
       // Setup a Are you sure you would like to delete the project? Modal
+      modalOpen();
+      projectSideClose();
+      modalContentDelProj(modalContent);
       console.log('clicked');
     });
 
