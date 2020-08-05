@@ -180,7 +180,13 @@ let projectFormTitle = document.createElement('label');
       yesBtn.addEventListener('click', () =>{
         console.log('yes was clicked');
         delete projectList.projectListObject[`${foundProj}`];
-        // changeCurrentProject(`${Object.keys(projectList.projectListObject[0])}`);
+        updateLocalStorage();
+        changeCurrentProject(projectList.projectListObject[Object.keys(projectList.projectListObject)[0]]);
+        displayRender.renderProj(currentProject);
+        displayRender.projectModalContentList.innerText = '';
+        displayRender.renderProjList(projectList);
+        modalClose();
+        
         console.log ('The Project List is:', projectList.projectListObject);
         console.log('The current project is', currentProject);
       });
