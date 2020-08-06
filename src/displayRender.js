@@ -504,9 +504,29 @@ const displayRender = (() => {
     currentDiv.textContent = '';
     completedDiv.textContent = '';
     // object in this case is a project
-    renderProjectItem(obj); // ham duplication
+    if (obj == undefined){
+      completedDivWrapper.style.display = 'none';
+      currentDivWrapper.style.display = 'none';
+      currentDiv.textContent = '';
+      completedDiv.textContent = '';
+      projectTitle.innerText = '';
+      let emptyProjWrapper = document.createElement('div');
+      emptyProjWrapper.className = 'emptyProjWrapper';
+      let emptyProjTitle = document.createElement('h2');
+      let emptyProjDesc = document.createElement('p');
+      emptyProjTitle.className = 'emptyProjTitle';
+      emptyProjDesc.className = 'emptyProjDesc';
+      emptyProjTitle.innerText = 'There are no Projects!';
+      emptyProjDesc.innerText = 'Click the hamburger icon > then the folder button to begin creating a new project.';
+      emptyProjWrapper.appendChild(emptyProjTitle);
+      emptyProjWrapper.appendChild(emptyProjDesc);
+      projectContainer.appendChild(emptyProjWrapper);
+      console.log('currentProj dont exist');
+  } else {
+    renderProjectItem(obj);
     renderTaskList(obj);
   }
+}
 
   return {
     isEmpty,
