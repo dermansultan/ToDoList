@@ -485,3 +485,12 @@ height: 25px;
     pointer-events: none;
 }
 
+.emptyProjWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.emptyProjDesc{
+    text-align: center;
+}
