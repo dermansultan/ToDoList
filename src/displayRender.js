@@ -74,7 +74,11 @@ const displayRender = (() => {
   let projectTitle = document.createElement("h1");
   projectTitle.className = "projectTitle";
   setTimeout(() => {
-    projectTitle.innerText = `${getCurrentProject().projTitle}`;
+    if (getCurrentProject() == undefined){
+      projectTitle.innerText = '';
+    } else {
+      projectTitle.innerText = `${getCurrentProject().projTitle}`;
+    }
   }, 100);
   let projectTitleWrapper = document.createElement("div");
   projectTitleWrapper.className = "projectTitleWrapper";

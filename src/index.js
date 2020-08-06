@@ -22,9 +22,14 @@ project1.tasksList.task4 = item4;
 
 // displayRender.renderProj(projectList.currentProjectTaskList);
 
+export let currentProject; 
 
+if (Object.keys(JSON.parse(localStorage.getItem('projectListObject'))).length == 0){
+    currentProject = undefined;
+    } else {
+    currentProject = JSON.parse(localStorage.getItem('currentProject')) || projectList.projectListObject[Object.keys(projectList.projectListObject)[0]];
+    }
 
-export let currentProject = JSON.parse(localStorage.getItem('currentProject')) || projectList.projectListObject[Object.keys(projectList.projectListObject)[0]];
 
 export function getCurrentProject(){
     return currentProject
@@ -44,6 +49,4 @@ export function updateLocalStorage(){
 // Give user a default Project
 displayRender.renderProj(currentProject);
 displayRender.renderProjList(projectList);
-// console.log(currentProject);
-console.log(currentProject.tasksList);
 
