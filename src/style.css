@@ -247,7 +247,7 @@ border-radius: 35px;
 
 .fa-bars{
     padding-left: 10px;
-    font-size: 35px;
+    font-size: 30px;
     color: #46529D;
 }
 
@@ -493,4 +493,11 @@ height: 25px;
 
 .emptyProjDesc{
     text-align: center;
+    color: #2EBAEE;
+}
+
+.emptyProjTitle{
+    text-align: center;
+    color: #46529D;
+    padding-bottom: 10px;
 }

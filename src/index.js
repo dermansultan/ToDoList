@@ -3,7 +3,8 @@ import projectList from './projectsList'
 import projectItem from './projectItem'
 import displayRender from './displayRender'
 import './style.css'
-import '@fortawesome/fontawesome-free/js/all.js'
+// import 'line-awesome/dist/font-awesome-line-awesome/css/all.min.css'
+import '@fortawesome/fontawesome-free/css/all.css'
 
 
 const project1 = projectItem('Default Project', {}, projectList.projectCounter++);
@@ -24,7 +25,8 @@ project1.tasksList.task4 = item4;
 
 export let currentProject; 
 
-if (Object.keys(JSON.parse(localStorage.getItem('projectListObject'))).length == 0){
+if (Object.keys(projectList.projectListObject).length == 0 || Object.keys(JSON.parse(localStorage.getItem('projectListObject')) || {} ).length == 0)
+{
     currentProject = undefined;
     } else {
     currentProject = JSON.parse(localStorage.getItem('currentProject')) || projectList.projectListObject[Object.keys(projectList.projectListObject)[0]];

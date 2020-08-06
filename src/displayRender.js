@@ -507,6 +507,7 @@ const displayRender = (() => {
   function renderProj(obj) {
     currentDiv.textContent = '';
     completedDiv.textContent = '';
+    // projectContainer.textContent = '';
     // object in this case is a project
     if (obj == undefined){
       completedDivWrapper.style.display = 'none';
