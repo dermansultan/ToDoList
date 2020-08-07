@@ -141,6 +141,20 @@ const displayRender = (() => {
   projectModalContainer.appendChild(projectModalContent);
   modalsContainer.appendChild(projectModalContainer);
 
+  // Message For when there are no Projects:
+  let emptyProjWrapper = document.createElement('div');
+  emptyProjWrapper.className = 'emptyProjWrapper';
+  let emptyProjTitle = document.createElement('h2');
+  let emptyProjDesc = document.createElement('p');
+  emptyProjTitle.className = 'emptyProjTitle';
+  emptyProjDesc.className = 'emptyProjDesc';
+  emptyProjTitle.innerText = 'There are no Projects!';
+  emptyProjDesc.innerText = 'Click the hamburger icon > then the folder button to begin creating a new project.';
+  emptyProjWrapper.appendChild(emptyProjTitle);
+  emptyProjWrapper.appendChild(emptyProjDesc);
+  projectContainer.appendChild(emptyProjWrapper);
+  emptyProjWrapper.style.display = 'none';
+
   function renderProjListItem(obj) {
     let projItemWrapper = document.createElement("li");
     projItemWrapper.dataset.projwrapperid = `${obj.projId}`;
@@ -293,16 +307,6 @@ const displayRender = (() => {
     });
 
   }
-
-  // function emptyTasksDiv(){
-  //   // changes dom render to empty on current and completed divs when empty
-  //   if (currentDivWrapper.textContent = '') {
-  //     currentDiv.style.display = 'none';
-  //   } else if ( completedDivWrapper.textContent = ''){
-  //     completedDiv.style.display = 'none';
-  //   }
-  // }
-
 
   //move this to another logic based module:
   // finds the object in the list with the same id
@@ -488,8 +492,16 @@ const displayRender = (() => {
   }
 
   // Renders tasklist property of a project object
+
+
+function emptyTaskList(){
+  completedDivWrapper.style.display = 'none';
+  currentDivWrapper.style.display = 'none';
+}
+
   function renderTaskList(obj) {
     let tasksListObject = obj.tasksList;
+    console.log('Task List Object:', tasksListObject);
     //renders projects task lists key's individual objects
     Object.keys(tasksListObject).forEach((element) => {
       // item is the individuals tasks dom created wrappers
@@ -497,7 +509,7 @@ const displayRender = (() => {
       pushTask(item, tasksListObject[element].completed);
     });
     getTasksCount(tasksListObject);
-    if (isEmpty(tasksListObject))
+    if (isEmpty(tasksListObject));
     {
       completedDivWrapper.style.display = 'none';
       currentDivWrapper.style.display = 'none';
@@ -507,27 +519,15 @@ const displayRender = (() => {
   function renderProj(obj) {
     currentDiv.textContent = '';
     completedDiv.textContent = '';
-    // projectContainer.textContent = '';
     // object in this case is a project
     if (obj == undefined){
-      completedDivWrapper.style.display = 'none';
-      currentDivWrapper.style.display = 'none';
-      currentDiv.textContent = '';
-      completedDiv.textContent = '';
       projectTitle.innerText = '';
-      let emptyProjWrapper = document.createElement('div');
-      emptyProjWrapper.className = 'emptyProjWrapper';
-      let emptyProjTitle = document.createElement('h2');
-      let emptyProjDesc = document.createElement('p');
-      emptyProjTitle.className = 'emptyProjTitle';
-      emptyProjDesc.className = 'emptyProjDesc';
-      emptyProjTitle.innerText = 'There are no Projects!';
-      emptyProjDesc.innerText = 'Click the hamburger icon > then the folder button to begin creating a new project.';
-      emptyProjWrapper.appendChild(emptyProjTitle);
-      emptyProjWrapper.appendChild(emptyProjDesc);
-      projectContainer.appendChild(emptyProjWrapper);
+      emptyProjWrapper.style.display = 'flex';
       console.log('currentProj dont exist');
+      emptyTaskList();
   } else {
+    emptyProjWrapper.style.display = 'none';
+    projectTitle.innerText = `${getCurrentProject().projTitle}`;
     renderProjectItem(obj);
     renderTaskList(obj);
   }

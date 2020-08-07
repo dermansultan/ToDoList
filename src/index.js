@@ -6,7 +6,7 @@ import './style.css'
 // import 'line-awesome/dist/font-awesome-line-awesome/css/all.min.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 
-
+function createDefaultProject(){
 const project1 = projectItem('Default Project', {}, projectList.projectCounter++);
 projectList.projectListObject["proj1"] = project1;
 
@@ -20,6 +20,8 @@ project1.tasksList.task1 = item1;
 project1.tasksList.task2 = item2;
 project1.tasksList.task3 = item3;
 project1.tasksList.task4 = item4;
+}
+
 
 // displayRender.renderProj(projectList.currentProjectTaskList);
 
@@ -29,7 +31,7 @@ if (Object.keys(projectList.projectListObject).length == 0 || Object.keys(JSON.p
 {
     currentProject = undefined;
     } else {
-    currentProject = JSON.parse(localStorage.getItem('currentProject')) || projectList.projectListObject[Object.keys(projectList.projectListObject)[0]];
+        currentProject =  JSON.parse(localStorage.getItem('currentProject')) || projectList.projectListObject[Object.keys(projectList.projectListObject)[0]];
     }
 
 
@@ -41,7 +43,7 @@ export function changeCurrentProject(obj){
     currentProject = obj; 
     localStorage.setItem('currentProject', JSON.stringify(currentProject)); 
 }
-// let currentProject = projectList.projectListObject[Object.keys(projectList.projectListObject)[0]];
+
 
 export function updateLocalStorage(){
     localStorage.setItem('projectListObject', JSON.stringify(projectList.projectListObject));
@@ -49,6 +51,5 @@ export function updateLocalStorage(){
 }
 
 // Give user a default Project
-displayRender.renderProj(currentProject);
+displayRender.renderProj(getCurrentProject());
 displayRender.renderProjList(projectList);
-
