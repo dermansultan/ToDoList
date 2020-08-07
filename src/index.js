@@ -6,6 +6,8 @@ import './style.css'
 // import 'line-awesome/dist/font-awesome-line-awesome/css/all.min.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 
+export let currentProject;
+
 function createDefaultProject(){
 const project1 = projectItem('Default Project', {}, projectList.projectCounter++);
 projectList.projectListObject["proj1"] = project1;
@@ -22,17 +24,21 @@ project1.tasksList.task3 = item3;
 project1.tasksList.task4 = item4;
 }
 
+if (projectList.projectListObject == null){
+    console.log('Project List Object Doesnt Exist');
+    projectList.projectListObject = {};
+    createDefaultProject();
+    changeCurrentProject(projectList.projectListObject["proj1"]);
+    updateLocalStorage();
 
-// displayRender.renderProj(projectList.currentProjectTaskList);
-
-export let currentProject; 
-
-if (Object.keys(projectList.projectListObject).length == 0 || Object.keys(JSON.parse(localStorage.getItem('projectListObject')) || {} ).length == 0)
-{
-    currentProject = undefined;
-    } else {
-        currentProject =  JSON.parse(localStorage.getItem('currentProject')) || projectList.projectListObject[Object.keys(projectList.projectListObject)[0]];
-    }
+} else {
+    if (Object.keys(projectList.projectListObject).length == 0 || Object.keys(JSON.parse(localStorage.getItem('projectListObject')) || {} ).length == 0)
+    {
+        currentProject = undefined;
+        } else {
+            currentProject =  JSON.parse(localStorage.getItem('currentProject')) || projectList.projectListObject[Object.keys(projectList.projectListObject)[0]];
+        }
+}
 
 
 export function getCurrentProject(){
