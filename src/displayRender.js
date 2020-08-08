@@ -34,19 +34,29 @@ const displayRender = (() => {
    });
    console.log(`Completed Tasks Count: ${completedTaskCount}`);
    console.log(`Current Tasks Count: ${currentTaskCount}`);
-   if (completedTaskCount == 0){
-    completedDivWrapper.style.display = 'none';
-  }
-   else if (currentTaskCount == 0) {
-   currentDivWrapper.style.display = 'none';
-  } else {
+   
+switch(true){
+case completedTaskCount > 0:
+completedDivWrapper.style.display = 'flex';
+break;
+
+case completedTaskCount == 0:
+completedDivWrapper.style.display = 'none';
+break;
+}
+
+switch(true){
+  case currentTaskCount > 0:
     currentDivWrapper.style.display = 'flex';
-    completedDivWrapper.style.display = 'flex';
-  }
+    break;
+
+    case currentTaskCount == 0:
+      currentDivWrapper.style.display = 'none';
+      break;
+}
 
 
  }
-
 
   // Pre rendered HTML elements
   // Hamburger Nav 
@@ -503,7 +513,7 @@ function emptyTaskList(){
       let item = renderTaskItem(tasksListObject[element]);
       pushTask(item, tasksListObject[element].completed);
     });
-    getTasksCount(obj);
+    getTasksCount(tasksListObject);
   }
 
   function renderProj(obj) {
