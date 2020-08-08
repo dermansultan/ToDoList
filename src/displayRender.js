@@ -381,6 +381,7 @@ switch(true){
     let taskDesc = document.createElement("p");
     taskDesc.innerText = `${taskObj.desc}`;
     taskDesc.className = "taskDesc";
+    taskDesc.classList.add('taskDescShow');
     // Due Date Container
     let taskDueDateWrapper = document.createElement("div");
     taskDueDateWrapper.className = "taskDueDateWrapper";
@@ -494,18 +495,28 @@ switch(true){
     expandBtnIcon.className = 'fas fa-angle-double-down';
     expandBtn.appendChild(expandBtnIcon);
     expandBtn.addEventListener('click', () =>{
-      if (taskDesc.style.display === 'none'){
-        taskDesc.style.display = 'flex';
-      } else {
-        taskDesc.style.display = 'none';
+
+      switch (true){
+        case taskDesc.classList.contains('taskDesc'):
+          taskDesc.classList.toggle('taskDescShow');
+          break;
+
+          case taskDesc.classList.contains('taskDescShow'):
+            taskDesc.classList.toggle('taskDesc');
+            break;
       }
-      if (expandBtnIcon.classList.contains('fa-angle-double-down')){
-        expandBtnIcon.classList.remove('fa-angle-double-down');
-        expandBtnIcon.classList.add('fa-angle-double-right');
-      } else {
-        expandBtnIcon.classList.remove('fa-angle-double-right');
-        expandBtnIcon.classList.add('fa-angle-double-down');
+
+      switch (true){
+        case expandBtnIcon.classList.contains('fa-angle-double-down'):
+          expandBtnIcon.classList.remove('fa-angle-double-down');
+          expandBtnIcon.classList.add('fa-angle-double-right');
+          break;
+
+          case expandBtnIcon.classList.contains('fa-angle-double-right'):
+            expandBtnIcon.classList.remove('fa-angle-double-right');
+            expandBtnIcon.classList.add('fa-angle-double-down');
       }
+
     });
     rightIconsWrapper.appendChild(expandBtn);
     // Append of all wrappers
