@@ -346,6 +346,24 @@ switch(true){
     return icon;
   }
 
+  function PrTextColor(objprop, textNode) {
+    switch (objprop) {
+      case "Low":
+        textNode.style.color = "#2EBAEE";
+        break;
+      case "Medium":
+        textNode.style.color = "#00A473";
+        break;
+      case "High":
+        textNode.style.color = "#DE3804";
+        break;
+      default:
+        textNode.style.color = "#2EBAEE";
+    }
+    return textNode;
+  }
+
+
   //  individual dom item
   function renderTaskItem(taskObj) {
     // to append to project container, contains list items from project
@@ -385,6 +403,7 @@ switch(true){
     taskPriorityIcon.className = "fas fa-exclamation-circle";
     PrIconColor(taskObj.priority, taskPriorityIcon);
     let taskPriority = document.createElement("p");
+    PrTextColor(taskObj.priority, taskPriority);
     taskPriority.innerText = `${taskObj.priority}`;
     taskPriority.className = "taskPriority";
     taskPriorityWrapper.appendChild(taskPriorityIcon);
