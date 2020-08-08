@@ -18,11 +18,6 @@ const displayRender = (() => {
  }
 
 
- // Takes object and returns true if length is 0
- function isEmpty(obj){
-  return Object.keys(obj).length === 0;
- }
-
  function getTasksCount(obj){
   let completedTaskCount = 0;
   let currentTaskCount = 0; 
@@ -508,12 +503,7 @@ function emptyTaskList(){
       let item = renderTaskItem(tasksListObject[element]);
       pushTask(item, tasksListObject[element].completed);
     });
-    getTasksCount(tasksListObject);
-    if (isEmpty(tasksListObject));
-    {
-      completedDivWrapper.style.display = 'none';
-      currentDivWrapper.style.display = 'none';
-    }
+    getTasksCount(obj);
   }
 
   function renderProj(obj) {
@@ -534,7 +524,6 @@ function emptyTaskList(){
 }
 
   return {
-    isEmpty,
     modalContent,
     modalOverlay,
     projectModalContentList,

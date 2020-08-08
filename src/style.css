@@ -185,6 +185,7 @@ flex-direction:column;
 .taskDueDateWrapper{
     display: flex;
     align-items: center;
+    margin-left: 5px;
 }
 
 
@@ -197,13 +198,13 @@ flex-direction:column;
 }
 
 .fa-clock{
-    width: 10px;
-    height: 10px;
+font-size: 10px;
+padding-right: 5px;
 }
 
 .fa-exclamation-circle{
-    width: 10px;
-    height: 10px;
+font-size: 10px;
+padding-right: 5px;
 }
 
 .fa-plus-circle{
