@@ -321,6 +321,7 @@ let projectFormTitle = document.createElement('label');
         "MMM do yyyy"
       )}`;
       modalClose();
+      updateLocalStorage();
     });
 
     modalOv.appendChild(taskFormTitleWrapper);
@@ -328,7 +329,6 @@ let projectFormTitle = document.createElement('label');
     modalOv.appendChild(taskFormDateWrapper);
     modalOv.appendChild(taskFormPrWrapper);
     modalOv.appendChild(submitBtn);
-    updateLocalStorage();
 
   }
   // Creating a new project
