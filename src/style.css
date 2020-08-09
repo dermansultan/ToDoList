@@ -534,3 +534,42 @@ height: 25px;
 .projectItemDelBtn{
     margin-left: 3px;
 }
+
+.deleteProjContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.deleteProjTitle{
+    margin-top: 15px;
+    text-align: center;
+    color: #46529D;
+    width: 90%;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.buttonsWrapper{
+    margin-top: 20px;
+    display: flex;
+    width: 50%;
+    justify-content: space-around;
+}
+
+.yesBtn, .noBtn{
+    width: 70px;
+    height: 35px;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+
+.yesBtn{
+    background-color: #46529D;
+}
+
+.noBtn{
+    background-color: #2EBAEE;
+}

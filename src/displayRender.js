@@ -553,9 +553,11 @@ function emptyTaskList(){
     if (obj == undefined){
       projectTitle.innerText = '';
       emptyProjWrapper.style.display = 'flex';
+      addItemBtnWrapper.style.display = 'none';
       console.log('currentProj dont exist');
       emptyTaskList();
   } else {
+    addItemBtnWrapper.style.display = 'flex';
     emptyProjWrapper.style.display = 'none';
     projectTitle.innerText = `${getCurrentProject().projTitle}`;
     renderProjectItem(obj);
