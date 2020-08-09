@@ -267,7 +267,8 @@ let projectFormTitle = document.createElement('label');
     let defOption = document.createElement("option");
     defOption.innerText = "Select Priority";
     defOption.selected = "selected";
-    defOption.disabled = "disabled";
+    defOption.disabled = true;
+    defOption.required = true;
 
     let lowOption = document.createElement("option");
     lowOption.innerText = "Low";
