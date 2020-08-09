@@ -261,6 +261,7 @@ switch(true){
 
   function pushTask(taskItem, completedStatus) {
     if (completedStatus) {
+      taskItem.querySelector('.taskCompleteBtn').checked = true;
       completedDiv.appendChild(taskItem);
     } else {
       currentDiv.appendChild(taskItem);
