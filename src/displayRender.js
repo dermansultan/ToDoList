@@ -576,7 +576,9 @@ function emptyTaskList(){
     renderProj,
     renderProjListItem,
     renderProjList,
-    getTasksCount
+    getTasksCount,
+    PrTextColor,
+    PrIconColor
   };
 })();
 
