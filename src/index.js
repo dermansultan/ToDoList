@@ -21,6 +21,7 @@ project1.tasksList.task1 = item1;
 if (projectList.projectListObject == null){
     console.log('Project List Object Doesnt Exist');
     projectList.projectListObject = {};
+    projectList.projectCounter = 0;
     createDefaultProject();
     changeCurrentProject(projectList.projectListObject["proj1"]);
     updateLocalStorage();
@@ -48,6 +49,7 @@ export function changeCurrentProject(obj){
 export function updateLocalStorage(){
     localStorage.setItem('projectListObject', JSON.stringify(projectList.projectListObject));
     localStorage.setItem('currentProject', JSON.stringify(currentProject));
+    localStorage.setItem('projectCounter', JSON.stringify(projectList.projectCounter));
 }
 
 // Give user a default Project

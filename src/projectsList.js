@@ -1,6 +1,6 @@
 const projectList = (() => {
     let projectListObject = JSON.parse(localStorage.getItem('projectListObject')) || null;
-    let projectCounter = 0;
+    let projectCounter = JSON.parse(localStorage.getItem('projectCounter')) || null;
   
     return { projectListObject, projectCounter}
 })();
