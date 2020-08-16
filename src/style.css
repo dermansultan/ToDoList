@@ -573,3 +573,8 @@ height: 25px;
 .noBtn{
     background-color: #2EBAEE;
 }
+
+.taskForm{
+    display: flex;
+    flex-direction: column;
+}

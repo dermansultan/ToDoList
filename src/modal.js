@@ -215,32 +215,28 @@ let projectFormTitle = document.createElement('label');
     let taskObj = currentProject.tasksList[`${taskKey}`];
 
     //  Title
-    let taskFormTitleWrapper = document.createElement("div");
-    taskFormTitleWrapper.className = "taskFormTitleWrapper";
     let taskFormTitleLbl = document.createElement("label");
     taskFormTitleLbl.className = "taskFormTitleLbl";
     taskFormTitleLbl.innerText = "Task";
     let taskFormTitleIn = document.createElement("input");
     taskFormTitleIn.className = "taskFormTitleIn";
     taskFormTitleIn.value = `${taskObj.title}`;
-    taskFormTitleWrapper.appendChild(taskFormTitleLbl);
-    taskFormTitleWrapper.appendChild(taskFormTitleIn);
+    taskForm.appendChild(taskFormTitleLbl);
+    taskForm.appendChild(taskFormTitleIn);
 
     //  Desc
-    let taskFormDescWrapper = document.createElement("div");
-    taskFormDescWrapper.className = "taskFormDescWrapper";
+
     let taskFormDescLbl = document.createElement("label");
     taskFormDescLbl.className = "taskFormDescLbl";
     taskFormDescLbl.innerText = "Description";
     let taskFormDescIn = document.createElement("input");
     taskFormDescIn.className = "taskFormDescIn";
     taskFormDescIn.value = `${taskObj.desc}`;
-    taskFormDescWrapper.appendChild(taskFormDescLbl);
-    taskFormDescWrapper.appendChild(taskFormDescIn);
+    taskForm.appendChild(taskFormDescLbl);
+    taskForm.appendChild(taskFormDescIn);
 
     // Date Due
-    let taskFormDateWrapper = document.createElement("div");
-    taskFormDateWrapper.className = "taskFormDateWrapper";
+
     let taskFormDateLbl = document.createElement("label");
     taskFormDateLbl.innerText = "Date";
     taskFormDateLbl.className = "taskFormDateLbl";
@@ -249,23 +245,22 @@ let projectFormTitle = document.createElement('label');
     taskFormDateIn.type = "date";
     let today = new Date();
     taskFormDateIn.value = today.toISOString().substr(0, 10);
-    taskFormDateWrapper.appendChild(taskFormDateLbl);
-    taskFormDateWrapper.appendChild(taskFormDateIn);
+    taskForm.appendChild(taskFormDateLbl);
+    taskForm.appendChild(taskFormDateIn);
 
     //  Priority
-    let taskFormPrWrapper = document.createElement("div");
-    taskFormPrWrapper.className = "taskFormPrWrapper";
-    let taskFormPrChoiceWrapper = document.createElement("div");
-    taskFormPrChoiceWrapper.className = "taskforPrChoiceWrapper";
+
 
     let taskFormPrLbl = document.createElement("label");
     taskFormPrLbl.innerText = "Priority";
 
     let taskFormPrSlct = document.createElement("select");
+    taskFormPrSlct.required = true;
     taskFormPrSlct.class = "taskFormPrSlct";
 
     let defOption = document.createElement("option");
     defOption.innerText = "Select Priority";
+    defOption.value = '';
     defOption.selected = "selected";
     defOption.disabled = true;
     defOption.required = true;
@@ -282,16 +277,16 @@ let projectFormTitle = document.createElement('label');
     taskFormPrSlct.appendChild(medOption);
     taskFormPrSlct.appendChild(highOption);
 
-    taskFormPrChoiceWrapper.appendChild(taskFormPrLbl);
-    taskFormPrChoiceWrapper.appendChild(taskFormPrSlct);
-    taskFormPrWrapper.appendChild(taskFormPrChoiceWrapper);
+    taskForm.appendChild(taskFormPrLbl);
+    taskForm.appendChild(taskFormPrSlct);
+
 
     // submit button
     let submitBtn = document.createElement("input");
     submitBtn.className = "submitBtn";
-    submitBtn.innerText = "create";
     submitBtn.type = "submit";
-    submitBtn.addEventListener("click", () => {
+    taskForm.addEventListener("submit", function (event) {
+    event.preventDefault();
       // replaces already existing key with:
       currentProject.tasksList[`${taskKey}`] = taskItem(
         `${taskFormTitleIn.value}`,
@@ -328,12 +323,8 @@ let projectFormTitle = document.createElement('label');
       modalClose();
       updateLocalStorage();
     });
-
-    modalOv.appendChild(taskFormTitleWrapper);
-    modalOv.appendChild(taskFormDescWrapper);
-    modalOv.appendChild(taskFormDateWrapper);
-    modalOv.appendChild(taskFormPrWrapper);
-    modalOv.appendChild(submitBtn);
+    taskForm.appendChild(submitBtn);
+    modalOv.appendChild(taskForm);
 
   }
   // Creating a new project
