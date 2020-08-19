@@ -578,3 +578,20 @@ height: 25px;
     display: flex;
     flex-direction: column;
 }
+
+.emptyTaskListWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.emptyTaskListTitle{
+    text-align: center;
+    color: #46529D;
+    padding-bottom: 10px;
+}
+
+.emptyTaskListDesc{
+    text-align: center;
+    color: #2EBAEE;
+}

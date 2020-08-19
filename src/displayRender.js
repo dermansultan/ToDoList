@@ -55,6 +55,15 @@ switch(true){
       break;
 }
 
+switch(true){
+  case currentTaskCount + completedTaskCount === 0:
+    emptyTaskListWrapper.style.display = 'flex';
+    break;
+  
+  case currentTaskCount + completedTaskCount >= 1:
+    emptyTaskListWrapper.style.display = 'none';
+    break;
+  }
 
  }
 
@@ -159,6 +168,20 @@ switch(true){
   emptyProjWrapper.appendChild(emptyProjDesc);
   projectContainer.appendChild(emptyProjWrapper);
   emptyProjWrapper.style.display = 'none';
+
+  // Message for when there are no tasks in a project  
+  let emptyTaskListWrapper = document.createElement('div');
+  emptyTaskListWrapper.className = 'emptyTaskListWrapper';
+  let emptyTaskListTitle = document.createElement('h2');
+  emptyTaskListTitle.innerText = 'There are no tasks!';
+  emptyTaskListTitle.className = 'emptyTaskListTitle';
+  let emptyTaskListDesc = document.createElement('p');
+  emptyTaskListDesc.innerText = 'Click the add button to create a task.'
+  emptyTaskListDesc.className = 'emptyTaskListDesc';
+  emptyTaskListWrapper.appendChild(emptyTaskListTitle);
+  emptyTaskListWrapper.appendChild(emptyTaskListDesc);
+  projectContainer.appendChild(emptyTaskListWrapper);
+  emptyTaskListWrapper.style.display = 'none';
 
   function renderProjListItem(obj) {
     let projItemWrapper = document.createElement("li");
