@@ -306,6 +306,7 @@ switch(true){
   let optionFilters = document.createElement('option');
   optionFilters.innerText = 'Filters'
   optionFilters.selected = true;
+  optionFilters.value = '';
   optionFilters.disabled = 'disabled';
   let optionPriority = document.createElement('option');
   optionPriority.value = 'priority'
@@ -319,8 +320,19 @@ switch(true){
   filterContainer.appendChild(filterTitle);
   filterContainer.appendChild(filterSelect);
   filterSelect.addEventListener('change', () => {
-    console.log('option was just chaneged.')
-  })
+    // console.log(filterSelect.value);
+    switch (filterSelect.value){
+      case 'dueDate':
+        console.log('dueDate filter')
+        break;
+        case 'priority':
+          console.log('dueDate priority')
+        break;
+        case '':
+          // do nothing brah
+          break;
+    }
+  });
   projectContainer.appendChild(filterContainer);
 
   
