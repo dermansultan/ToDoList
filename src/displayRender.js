@@ -58,10 +58,12 @@ switch(true){
 switch(true){
   case currentTaskCount + completedTaskCount === 0:
     emptyTaskListWrapper.style.display = 'flex';
+    filterContainer.style.display = 'none';
     break;
   
   case currentTaskCount + completedTaskCount >= 1:
     emptyTaskListWrapper.style.display = 'none';
+    filterContainer.style.display = 'flex';
     break;
   }
 
@@ -294,14 +296,31 @@ switch(true){
   // Make filter options
   // watch for change on select options then run the filter. 
   let filterContainer = document.createElement('div');
+  let filterTitle = document.createElement('h3');
+  filterTitle.className = 'filterTitle';
+  filterTitle.innerText = 'Sort By:'
+
   filterContainer.className = 'filterContainer';
   let filterSelect = document.createElement('select');
   filterSelect.className = 'filterSelect';
+  let optionFilters = document.createElement('option');
+  optionFilters.innerText = 'Filters'
+  optionFilters.selected = true;
+  optionFilters.disabled = 'disabled';
   let optionPriority = document.createElement('option');
+  optionPriority.value = 'priority'
+  optionPriority.innerText = 'Priority';
   let optionDueDate = document.createElement('option');
+  optionDueDate.value = 'dueDate';
+  optionDueDate.innerText = 'Due Date';
+  filterSelect.appendChild(optionFilters);
   filterSelect.appendChild(optionDueDate);
   filterSelect.appendChild(optionPriority);
+  filterContainer.appendChild(filterTitle);
   filterContainer.appendChild(filterSelect);
+  filterSelect.addEventListener('change', () => {
+    console.log('option was just chaneged.')
+  })
   projectContainer.appendChild(filterContainer);
 
   
