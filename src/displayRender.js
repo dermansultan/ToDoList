@@ -291,6 +291,20 @@ switch(true){
     }
   }
 
+  // Make filter options
+  // watch for change on select options then run the filter. 
+  let filterContainer = document.createElement('div');
+  filterContainer.className = 'filterContainer';
+  let filterSelect = document.createElement('select');
+  filterSelect.className = 'filterSelect';
+  let optionPriority = document.createElement('option');
+  let optionDueDate = document.createElement('option');
+  filterSelect.appendChild(optionDueDate);
+  filterSelect.appendChild(optionPriority);
+  filterContainer.appendChild(filterSelect);
+  projectContainer.appendChild(filterContainer);
+
+  
   // Make Current and Completed Div Prerendered: 
     // Current Div Wrapper Creation:
     const currentDivWrapper = document.createElement("div");
