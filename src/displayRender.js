@@ -17,6 +17,26 @@ const displayRender = (() => {
     obj.completed = !obj.completed;
  }
 
+ function filterObjArray(obj){
+   let newObjArr = Object.keys(obj.tasksList).sort(function (a, b){
+    if (obj.tasksList[a].priorityVal < obj.tasksList[b].priorityVal) {
+      console.log('a was smaller')
+      return -1;
+    }
+    if (obj.tasksList[a].priorityVal > obj.tasksList[b].priorityVal) {
+      console.log('a was bigger')
+      return 1;
+    }
+    // a must be equal to b
+    return 0;
+   });
+   let newTaskList = {}
+   for (const task of newObjArr){
+    console.log(task);
+    newTaskList[task] = obj.tasksList[task];
+   }
+   obj.tasksList = newTaskList;
+ }
 
  function getTasksCount(obj){
   let completedTaskCount = 0;
@@ -326,6 +346,13 @@ switch(true){
         console.log('dueDate filter')
         break;
         case 'priority':
+          console.log('Pre', currentProject.tasksList);
+          filterObjArray(currentProject); 
+          console.log('Post', currentProject.tasksList);
+          renderProj(currentProject);
+          // we have to manipulate the object array. 
+          // render that array with appropriate render methods
+          // update local storage array with new filtered array 
           console.log('dueDate priority')
         break;
         case '':

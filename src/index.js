@@ -13,8 +13,12 @@ const project1 = projectItem('Default Project', {}, projectList.projectCounter++
 projectList.projectListObject["proj1"] = project1;
 
 //project1
-const item1 = taskItem('This is a task', `Great you learned how to view task descriptions.`, '01/01/2020', 'Low', false, ++project1.taskCounter);
+const item1 = taskItem('This is a task', `Great you learned how to view task descriptions.`, '01/01/2020', 'Low', 1, false, ++project1.taskCounter);
+const item2 = taskItem('This is a task', `Great you learned how to view task descriptions.`, '01/01/2020', 'High', 3, false, ++project1.taskCounter);
+const item3 = taskItem('This is a task', `Great you learned how to view task descriptions.`, '01/01/2020', 'Medium', 2, false, ++project1.taskCounter);
 project1.tasksList.task1 = item1;
+project1.tasksList.task2 = item2;
+project1.tasksList.task3 = item3;
 
 }
 

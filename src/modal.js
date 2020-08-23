@@ -105,10 +105,13 @@ let projectFormTitle = document.createElement('label');
     
         let lowOption = document.createElement("option");
         lowOption.innerText = "Low";
+        lowOption.value = 1;
         let medOption = document.createElement("option");
         medOption.innerText = "Medium";
+        medOption.value = 2;
         let highOption = document.createElement("option");
         highOption.innerText = "High";
+        highOption.value = 3;
     
         taskFormPrSlct.appendChild(lowOption);
         taskFormPrSlct.appendChild(medOption);
@@ -136,7 +139,8 @@ let projectFormTitle = document.createElement('label');
               ),
               "MMM do yyyy"
             )}`,
-            `${taskFormPrSlct.value}`,
+            `${taskFormPrSlct.options[taskFormPrSlct.selectedIndex].text}`,
+            taskFormPrSlct.value,
             false,
             currentProject.taskCounter
           );
@@ -267,10 +271,13 @@ let projectFormTitle = document.createElement('label');
 
     let lowOption = document.createElement("option");
     lowOption.innerText = "Low";
+    lowOption.value = 1;
     let medOption = document.createElement("option");
     medOption.innerText = "Medium";
+    medOption.value = 2;
     let highOption = document.createElement("option");
     highOption.innerText = "High";
+    highOption.value = 3;
 
     taskFormPrSlct.appendChild(defOption);
     taskFormPrSlct.appendChild(lowOption);
@@ -297,7 +304,8 @@ let projectFormTitle = document.createElement('label');
           ),
           "MMM do yyyy"
         )}`,
-        `${taskFormPrSlct.value}`,
+        `${taskFormPrSlct.options[taskFormPrSlct.selectedIndex].text}`,
+        taskFormPrSlct.value,
         false,
         taskObj.id
       );
