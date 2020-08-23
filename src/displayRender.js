@@ -53,7 +53,25 @@ const displayRender = (() => {
        }
        obj.tasksList = newTaskList;
        break;
-
+      case 'dateCreated':
+        newObjArr = Object.keys(obj.tasksList).sort(function (a, b){
+          if (obj.tasksList[a].id < obj.tasksList[b].id) {
+            console.log('a was smaller')
+            return -1;
+          }
+          if (obj.tasksList[a].id > obj.tasksList[b].id) {
+            console.log('a was bigger')
+            return 1;
+          }
+          // a must be equal to b
+          return 0;
+         });
+         newTaskList = {}
+         for (const task of newObjArr){
+          console.log(task);
+          newTaskList[task] = obj.tasksList[task];
+         }
+         obj.tasksList = newTaskList;
   }
  }
 
@@ -353,8 +371,12 @@ switch(true){
   let optionDueDate = document.createElement('option');
   optionDueDate.value = 'dueDate';
   optionDueDate.innerText = 'Due Date';
+  let optionDateCreated = document.createElement('option');
+  optionDateCreated.value = 'dateCreated'
+  optionDateCreated.innerText = 'Date Created'
   filterSelect.appendChild(optionFilters);
   filterSelect.appendChild(optionDueDate);
+  filterSelect.appendChild(optionDateCreated);
   filterSelect.appendChild(optionPriority);
   filterContainer.appendChild(filterTitle);
   filterContainer.appendChild(filterSelect);
@@ -376,6 +398,10 @@ switch(true){
           // render that array with appropriate render methods
           // update local storage array with new filtered array  
         break;
+        case 'dateCreated':
+          filterObjArray(currentProject, 'dateCreated'); 
+          renderProj(currentProject);
+          break;
         case '':
           // do nothing brah
           break;
