@@ -317,9 +317,9 @@ let projectFormTitle = document.createElement('label');
       wrapper.querySelector(".taskDesc").innerText = `${taskFormDescIn.value}`;
       wrapper.querySelector(
         ".taskPriority"
-      ).innerText = `${taskFormPrSlct.value}`;
-      displayRender.PrIconColor(`${taskFormPrSlct.value}`, wrapper.querySelector(".fa-exclamation-circle") );
-      displayRender.PrTextColor(`${taskFormPrSlct.value}`, wrapper.querySelector(
+      ).innerText = `${taskFormPrSlct.options[taskFormPrSlct.selectedIndex].text}`;
+      displayRender.PrIconColor(`${taskFormPrSlct.options[taskFormPrSlct.selectedIndex].text}`, wrapper.querySelector(".fa-exclamation-circle") );
+      displayRender.PrTextColor(`${taskFormPrSlct.options[taskFormPrSlct.selectedIndex].text}`, wrapper.querySelector(
         ".taskPriority"));
       // change color of priority object as well.
       wrapper.querySelector(".taskDueDate").innerText = `${format(

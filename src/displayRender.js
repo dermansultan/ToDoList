@@ -2,6 +2,7 @@ import projectList from "./projectsList";
 import { getCurrentProject, changeCurrentProject, currentProject, updateLocalStorage } from "./index";
 import { modalOpen, modalContentTask, modalContentEditTask, createNewProject, modalContentEditProj, modalContentDelProj} from "./modal"
 import taskItem from "./toDoTaskItem";
+import { format, compareAsc, parseISO } from "date-fns";
 const displayRender = (() => {
   // create the project container based off of what the project object is...
 
@@ -17,25 +18,43 @@ const displayRender = (() => {
     obj.completed = !obj.completed;
  }
 
- function filterObjArray(obj){
-   let newObjArr = Object.keys(obj.tasksList).sort(function (a, b){
-    if (obj.tasksList[a].priorityVal < obj.tasksList[b].priorityVal) {
-      console.log('a was smaller')
-      return -1;
-    }
-    if (obj.tasksList[a].priorityVal > obj.tasksList[b].priorityVal) {
-      console.log('a was bigger')
-      return 1;
-    }
-    // a must be equal to b
-    return 0;
-   });
-   let newTaskList = {}
-   for (const task of newObjArr){
-    console.log(task);
-    newTaskList[task] = obj.tasksList[task];
-   }
-   obj.tasksList = newTaskList;
+ function filterObjArray(obj, filterType){
+  let newObjArr;
+  let newTaskList = {}
+  switch(filterType){
+    case 'priority':
+    newObjArr = Object.keys(obj.tasksList).sort(function (a, b){
+      if (obj.tasksList[a].priorityVal < obj.tasksList[b].priorityVal) {
+        console.log('a was smaller')
+        return -1;
+      }
+      if (obj.tasksList[a].priorityVal > obj.tasksList[b].priorityVal) {
+        console.log('a was bigger')
+        return 1;
+      }
+      // a must be equal to b
+      return 0;
+     });
+     newTaskList = {}
+     for (const task of newObjArr){
+      console.log(task);
+      newTaskList[task] = obj.tasksList[task];
+     }
+     obj.tasksList = newTaskList;
+     break;
+     case 'dueDate':
+      newObjArr = Object.keys(obj.tasksList).sort(function (a, b){
+        compareAsc(parseISO(obj.tasksList[a].dueDate), parseISO(obj.tasksList[b].dueDate))
+       });
+       newTaskList = {}
+       for (const task of newObjArr){
+        console.log(task);
+        newTaskList[task] = obj.tasksList[task];
+       }
+       obj.tasksList = newTaskList;
+       break;
+
+  }
  }
 
  function getTasksCount(obj){
@@ -343,17 +362,19 @@ switch(true){
     // console.log(filterSelect.value);
     switch (filterSelect.value){
       case 'dueDate':
-        console.log('dueDate filter')
+        console.log('Pre', currentProject.tasksList);
+        filterObjArray(currentProject, 'dueDate'); 
+        console.log('Post', currentProject.tasksList);
+        renderProj(currentProject);
         break;
         case 'priority':
           console.log('Pre', currentProject.tasksList);
-          filterObjArray(currentProject); 
+          filterObjArray(currentProject, 'priority'); 
           console.log('Post', currentProject.tasksList);
           renderProj(currentProject);
           // we have to manipulate the object array. 
           // render that array with appropriate render methods
-          // update local storage array with new filtered array 
-          console.log('dueDate priority')
+          // update local storage array with new filtered array  
         break;
         case '':
           // do nothing brah
