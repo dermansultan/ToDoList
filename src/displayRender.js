@@ -6,6 +6,15 @@ import { format, compareAsc, parseISO } from "date-fns";
 const displayRender = (() => {
   // create the project container based off of what the project object is...
 
+function parseTaskDate(dateString){
+const date = dateString;
+const splitDate = date.split(' ');
+const removedSuffix = splitDate[1].substring(0,2);
+const newDate = `${splitDate[0]} ${removedSuffix} ${splitDate[2]}`;
+console.log('newDate:', newDate);
+return new Date(Date.parse(newDate));
+  }
+
   function projectSideClose(){
     projectModalContainer.style.width = "0";
     projectModalContent.style.opacity = "0";
@@ -44,7 +53,7 @@ const displayRender = (() => {
      break;
      case 'dueDate':
       newObjArr = Object.keys(obj.tasksList).sort(function (a, b){
-        compareAsc(parseISO(obj.tasksList[a].dueDate), parseISO(obj.tasksList[b].dueDate))
+        return compareAsc(parseTaskDate(obj.tasksList[a].dueDate), parseTaskDate(obj.tasksList[b].dueDate));
        });
        newTaskList = {}
        for (const task of newObjArr){
@@ -388,12 +397,14 @@ switch(true){
         filterObjArray(currentProject, 'dueDate'); 
         console.log('Post', currentProject.tasksList);
         renderProj(currentProject);
+        updateLocalStorage();
         break;
         case 'priority':
           console.log('Pre', currentProject.tasksList);
           filterObjArray(currentProject, 'priority'); 
           console.log('Post', currentProject.tasksList);
           renderProj(currentProject);
+          updateLocalStorage();
           // we have to manipulate the object array. 
           // render that array with appropriate render methods
           // update local storage array with new filtered array  
@@ -401,6 +412,7 @@ switch(true){
         case 'dateCreated':
           filterObjArray(currentProject, 'dateCreated'); 
           renderProj(currentProject);
+          updateLocalStorage();
           break;
         case '':
           // do nothing brah

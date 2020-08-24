@@ -595,3 +595,17 @@ height: 25px;
     text-align: center;
     color: #2EBAEE;
 }
+
+.filterContainer{
+display: flex;
+justify-content: flex-start;
+}
+
+.filterTitle{
+margin-left: 10px;
+color: #46529D;
+}
+
+.filterSelect{
+margin-left: 10px;
+}
