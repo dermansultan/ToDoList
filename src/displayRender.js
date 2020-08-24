@@ -31,6 +31,7 @@ return new Date(Date.parse(newDate));
   let newObjArr;
   let newTaskList = {}
   switch(filterType){
+    case 'Priority':
     case 'priority':
     newObjArr = Object.keys(obj.tasksList).sort(function (a, b){
       if (obj.tasksList[a].priorityVal < obj.tasksList[b].priorityVal) {
@@ -724,6 +725,7 @@ function emptyTaskList(){
     modalContent,
     modalOverlay,
     projectModalContentList,
+    filterSelect,
     pushTask,
     renderTaskList,
     renderTaskItem,
@@ -733,7 +735,9 @@ function emptyTaskList(){
     renderProjList,
     getTasksCount,
     PrTextColor,
-    PrIconColor
+    PrIconColor,
+    filterObjArray,
+    parseTaskDate
   };
 })();
 

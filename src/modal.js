@@ -154,6 +154,9 @@ let projectFormTitle = document.createElement('label');
           updateLocalStorage();
           modalClose();
           displayRender.getTasksCount(currentProject.tasksList);
+          displayRender.filterObjArray(currentProject, `${displayRender.filterSelect.options[displayRender.filterSelect.selectedIndex].text}`);
+          displayRender.renderProj(currentProject);
+          updateLocalStorage();
         });
     
         taskForm.appendChild(taskFormTitleWrapper);
@@ -329,6 +332,9 @@ let projectFormTitle = document.createElement('label');
         "MMM do yyyy"
       )}`;
       modalClose();
+      updateLocalStorage();
+      displayRender.filterObjArray(currentProject, `${displayRender.filterSelect.options[displayRender.filterSelect.selectedIndex].text}`);
+      displayRender.renderProj(currentProject);
       updateLocalStorage();
     });
     taskForm.appendChild(submitBtn);
