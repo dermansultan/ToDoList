@@ -1,611 +1,600 @@
-@import url('https://fonts.googleapis.com/css2?family=Muli:wght@300;400;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Muli:wght@300;400;600;700;800;900&display=swap");
 
 * {
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-    background-color: white;
-    font-family: Muli;
+  background-color: white;
+  font-family: Muli;
 }
 
 /* Project is being displayed */
-.projectTitle{
-    color: #46529D;
-    font-size: 24px;
-    max-width: 200px;
-    overflow:hidden;
-    display:inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.projectTitle {
+  color: #46529d;
+  font-size: 24px;
+  max-width: 200px;
+  overflow: hidden;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.projectTitleWrapper{
-    display: flex;
-    align-items: center;
+.projectTitleWrapper {
+  display: flex;
+  align-items: center;
 }
 
 /* Parent Container */
 
-.projectDetailsWrapper{
-    display: flex;
-    width: 100vw;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 10px;
-    padding-bottom: 25px;
+.projectDetailsWrapper {
+  display: flex;
+  width: 100vw;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 25px;
 }
 
-.currentTitle{
-    color: #46529D;
-    font-weight: 600;
-    font-size: 18px;
-    padding-left: 8px;
+.currentTitle {
+  color: #46529d;
+  font-weight: 600;
+  font-size: 18px;
+  padding-left: 8px;
 }
 
-
-.completedTitle{
-    color: #46529D;
-    font-weight: 600;
-    font-size: 18px;
-    padding-left: 8px;
+.completedTitle {
+  color: #46529d;
+  font-weight: 600;
+  font-size: 18px;
+  padding-left: 8px;
 }
 
-
-.taskTitle{
-    color: #46529D;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
+.taskTitle {
+  color: #46529d;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
 }
 
-.taskCompleteBtn{
-    background-color: #2EBAEE;
-
+.taskCompleteBtn {
+  background-color: #2ebaee;
 }
 
-.taskPriority{
-color: #2EBAEE;
-font-size: 10px;
+.taskPriority {
+  color: #2ebaee;
+  font-size: 10px;
 }
 
-.taskDueDate{
-color: #2EBAEE;
-font-size: 10px;
+.taskDueDate {
+  color: #2ebaee;
+  font-size: 10px;
 }
 
-.taskDesc{
-    display: flex;
-    padding-top: 4px;
-    opacity: 1;
-    transition: 0.5s;
-    font-size: 12px;
-    text-overflow: ellipsis; 
-    padding-bottom: 5px;
-    padding-right: 4px;
-    color: #787878;
-    pointer-events: none;
-    
+.taskDesc {
+  display: flex;
+  padding-top: 4px;
+  opacity: 1;
+  transition: 0.5s;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  padding-bottom: 5px;
+  padding-right: 4px;
+  color: #787878;
+  pointer-events: none;
 }
 
-.taskDescShow{
-    display: none;
-    padding-top: 4px;
-    opacity: 1;
-    transition: 0.5s;
-    font-size: 12px;
-    text-overflow: ellipsis; 
-    padding-bottom: 5px;
-    padding-right: 4px;
-    color: #787878;
-    pointer-events: none;
+.taskDescShow {
+  display: none;
+  padding-top: 4px;
+  opacity: 1;
+  transition: 0.5s;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  padding-bottom: 5px;
+  padding-right: 4px;
+  color: #787878;
+  pointer-events: none;
 }
 
-.taskMoreBtn{
-    color: #46529D;
-    border: 0;
-    width: 20px;
-    background-color: transparent;
-    height: 20px;
+.taskMoreBtn {
+  color: #46529d;
+  border: 0;
+  width: 20px;
+  background-color: transparent;
+  height: 20px;
 }
 
-.taskEditBtn{
-    color: #46529D;
-    border: 0;
-    width: 20px;
-    background-color: transparent;
-    height: 20px;
+.taskEditBtn {
+  color: #46529d;
+  border: 0;
+  width: 20px;
+  background-color: transparent;
+  height: 20px;
 }
 
-.expandBtn{
-    border: 0;
-    width: 18px;
-    background-color: transparent;
-    height: 18px;
-    display: flex;
-    align-items: center;
+.expandBtn {
+  border: 0;
+  width: 18px;
+  background-color: transparent;
+  height: 18px;
+  display: flex;
+  align-items: center;
 }
 
-.fa-angle-double-down, .fa-angle-double-right{
-    pointer-events: none;
-    color: #46529D;
-    font-size: 18px;
-    margin-left: 10px;
+.fa-angle-double-down,
+.fa-angle-double-right {
+  pointer-events: none;
+  color: #46529d;
+  font-size: 18px;
+  margin-left: 10px;
 }
 
-
-.fa-trash-alt{
-font-size: 18px;
-color: #46529D;
+.fa-trash-alt {
+  font-size: 18px;
+  color: #46529d;
 }
 
-.fa-pencil-alt{
-    font-size: 18px;
+.fa-pencil-alt {
+  font-size: 18px;
 }
 
-.currentDivWrapper{
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-    padding-top: 10px;
+.currentDivWrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  padding-top: 10px;
 }
 
-.completedDivWrapper{
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-    padding-top: 10px;
+.completedDivWrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  padding-top: 10px;
 }
 
-.taskItemWrapper{
-    display: flex;
-  justify-content:space-between;
-  align-items:center;
-    width: 100vw;
-    min-height: 66px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 9px #E6E6E6;
-    flex-direction: row;
-}
- 
-.rightIconsWrapper{
-    padding-right: 10px;
-    display: flex;
-    justify-content: space-between;
-    min-width: 100px;
-    align-items: center;
+.taskItemWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  min-height: 66px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 9px #e6e6e6;
+  flex-direction: row;
 }
 
-.leftWrapper{
-padding-top: 10px;
-padding-left: 15px;
-display:flex;
-flex-direction:column;
+.rightIconsWrapper {
+  padding-right: 10px;
+  display: flex;
+  justify-content: space-between;
+  min-width: 100px;
+  align-items: center;
 }
 
-.taskPriorityWrapper{
-    display: flex;
-    align-items: center;
+.leftWrapper {
+  padding-top: 10px;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
-.metaWrapper{
-    display: flex;
+.taskPriorityWrapper {
+  display: flex;
+  align-items: center;
 }
 
-.taskDueDateWrapper{
-    display: flex;
-    align-items: center;
-    margin-left: 5px;
+.metaWrapper {
+  display: flex;
 }
 
-
-.fa-check-double{
-    font-size: 15px;
+.taskDueDateWrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
 }
 
-.fa-star{
-    font-size: 15px;
+.fa-check-double {
+  font-size: 15px;
 }
 
-.fa-clock{
-font-size: 10px;
-padding-right: 5px;
+.fa-star {
+  font-size: 15px;
 }
 
-.fa-exclamation-circle{
-font-size: 10px;
-padding-right: 5px;
+.fa-clock {
+  font-size: 10px;
+  padding-right: 5px;
 }
 
-.fa-plus-circle{
-font-size: 70px;
-color: #2EBAEE;
+.fa-exclamation-circle {
+  font-size: 10px;
+  padding-right: 5px;
 }
 
-
-.addItemBtnWrapper{
-position: fixed;
-bottom: 30px;
-right: 20px; 
-z-index: 1;
-border: 0;
-border-radius: 35px;
+.fa-plus-circle {
+  font-size: 70px;
+  color: #2ebaee;
 }
 
-.projectEditBtn{
-    padding-left: 10px;
-    border: none;
-    background:none;
-    width: 15px;
-    height: 15px;
+.addItemBtnWrapper {
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  z-index: 1;
+  border: 0;
+  border-radius: 35px;
 }
 
-.fa-edit{
-    color: #46529D;
-    width: 15px;
-    height: 15px;
-    cursor: pointer;
+.projectEditBtn {
+  padding-left: 10px;
+  border: none;
+  background: none;
+  width: 15px;
+  height: 15px;
 }
 
-
-
-.hamIconWrapper{
-    height: 35px;
-    width: 35px;
-    background: transparent;
-    border: 0;
+.fa-edit {
+  color: #46529d;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
 }
 
-.fa-bars{
-    padding-left: 10px;
-    font-size: 25px;
-    color: #46529D;
+.hamIconWrapper {
+  height: 35px;
+  width: 35px;
+  background: transparent;
+  border: 0;
 }
 
-
-
-.modalOverlay{
-    visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    align-content: stretch;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 2;
+.fa-bars {
+  padding-left: 10px;
+  font-size: 25px;
+  color: #46529d;
 }
 
-.modalContent{
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: white;
-    min-width: 250px;
-    min-height: 125px;
-    border-radius: 10px;
+.modalOverlay {
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: stretch;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
 }
 
-.taskFormTitleWrapper{
-    display: flex;
-    margin-top: 15px;
-    flex-direction: column;
+.modalContent {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: white;
+  min-width: 250px;
+  min-height: 125px;
+  border-radius: 10px;
 }
 
-.taskForm{
-    height: 300px;
+.taskFormTitleWrapper {
+  display: flex;
+  margin-top: 15px;
+  flex-direction: column;
 }
 
-
-.taskFormTitleLbl{
-    color: #46529D;
-    font-weight: 600;
-    font-size: 18px;
+.taskForm {
+  height: 300px;
 }
 
-.taskFormDateLbl{
-    color: #46529D;
-    font-weight: 600;
-    font-size: 18px;
+.taskFormTitleLbl {
+  color: #46529d;
+  font-weight: 600;
+  font-size: 18px;
 }
 
-.submitBtn{
-    border: 0;
-border-radius: 5px;
-background-color: #2EBAEE;
-color: white;
-font-size: 12px;
-width: 150px;
-font-weight: 800;
-height: 25px;
+.taskFormDateLbl {
+  color: #46529d;
+  font-weight: 600;
+  font-size: 18px;
 }
 
-.taskFormDescLbl{
-    color: #46529D;
-    font-weight: 600;
-    font-size: 18px;
+.submitBtn {
+  border: 0;
+  border-radius: 5px;
+  background-color: #2ebaee;
+  color: white;
+  font-size: 12px;
+  width: 150px;
+  font-weight: 800;
+  height: 25px;
 }
 
-.taskFormTitleIn{
-    height: 30px;
-    border: 1px solid #46529D;
-    border-radius: 5px;
-    padding-left: 5px;
+.taskFormDescLbl {
+  color: #46529d;
+  font-weight: 600;
+  font-size: 18px;
 }
 
-.taskFormDescIn{
-    height: 30px;
-    border: 1px solid #46529D;
-    border-radius: 5px;
-    padding-left: 5px;
+.taskFormTitleIn {
+  height: 30px;
+  border: 1px solid #46529d;
+  border-radius: 5px;
+  padding-left: 5px;
 }
 
-.taskFormDateIn{
-    height: 30px;
-    border: 1px solid #46529D;
-    border-radius: 5px;
-    padding-left: 5px;
+.taskFormDescIn {
+  height: 30px;
+  border: 1px solid #46529d;
+  border-radius: 5px;
+  padding-left: 5px;
 }
 
-.taskFormDescWrapper{
-    display: flex;
-    flex-direction: column;
+.taskFormDateIn {
+  height: 30px;
+  border: 1px solid #46529d;
+  border-radius: 5px;
+  padding-left: 5px;
 }
 
-.taskFormDateWrapper{
-    display: flex;
-    flex-direction: column;
+.taskFormDescWrapper {
+  display: flex;
+  flex-direction: column;
 }
 
-.taskFormPrWrapper{
-    display: flex;
-    flex-direction: column;
+.taskFormDateWrapper {
+  display: flex;
+  flex-direction: column;
 }
 
-.taskforPrChoiceWrapper{
-    display: flex;
-    flex-direction: column;
+.taskFormPrWrapper {
+  display: flex;
+  flex-direction: column;
 }
 
-.submitBtn{
-    margin-top: 20px;
+.taskforPrChoiceWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.submitBtn {
+  margin-top: 20px;
 }
 
 /* Sidebar Modal */
-.projectModalContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    height: 100vh;
-    width: 0;
-    position: fixed;
-    z-index: 3;
-    top: 0;
-    left: 0;
-    background-color: white;
-    box-shadow: 0px 4px 9px #E6E6E6;
-    transition: 0.5s;
+.projectModalContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100vh;
+  width: 0;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  background-color: white;
+  box-shadow: 0px 4px 9px #e6e6e6;
+  transition: 0.5s;
 }
 
-.projectModalCloseBtn{
-    display: flex;
-    margin-left: 0;
-    margin-top: 2px;
-    flex-direction: column;
-    transition: 0.5s;
-    color: #2EBAEE;
-    border: 0;
-    background-color: transparent;
-    width: 25px;
-    height: 25px;
+.projectModalCloseBtn {
+  display: flex;
+  margin-left: 0;
+  margin-top: 2px;
+  flex-direction: column;
+  transition: 0.5s;
+  color: #2ebaee;
+  border: 0;
+  background-color: transparent;
+  width: 25px;
+  height: 25px;
 }
 
-.fa-times-circle{
-    font-size: 20px;
+.fa-times-circle {
+  font-size: 20px;
 }
 
-.projectModalContent{
-    opacity: 0;
-    transition: 0.5s;
-    pointer-events: none;
-
+.projectModalContent {
+  opacity: 0;
+  transition: 0.5s;
+  pointer-events: none;
 }
 
-.projectAddBtnWrapper{
-    display: flex;
-    justify-content: center;
+.projectAddBtnWrapper {
+  display: flex;
+  justify-content: center;
 }
 
-.fa-folder-plus{
-    color: #2EBAEE;
-    font-size: 50px;
+.fa-folder-plus {
+  color: #2ebaee;
+  font-size: 50px;
 }
 
-.fa-folder{
-    color: #2EBAEE;
-    font-size: 12px;
+.fa-folder {
+  color: #2ebaee;
+  font-size: 12px;
 }
 
-
-.projItemTitle{
-    font-size: 15px;
-    color: #46529D;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding-right: 10px;
+.projItemTitle {
+  font-size: 15px;
+  color: #46529d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
 }
 
-.projItemWrapper{
-    display: flex;
-    max-width: 192px;
-    margin-left: 15px;
-    align-items: center;
+.projItemWrapper {
+  display: flex;
+  max-width: 192px;
+  margin-left: 15px;
+  align-items: center;
 }
 
 /* Modal Content = Project creation */
 
-.projectFormSubmitBtn{
-    margin-top: 10px;
-    width: 100px;
+.projectFormSubmitBtn {
+  margin-top: 10px;
+  width: 100px;
 }
 
 /* Adding a new Project Selectors */
 
-.newProjectForm{
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
+.newProjectForm {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
-.projectFormTitle{
-    color: #46529D;
-    font-weight: 600;
-    font-size: 18px;
+.projectFormTitle {
+  color: #46529d;
+  font-weight: 600;
+  font-size: 18px;
 }
 
-.projectFormTitleIn{
-    margin-top: 10px;
-    height: 30px;
-    border: 1px solid #46529D;
-    border-radius: 5px;
-    padding-left: 5px;
+.projectFormTitleIn {
+  margin-top: 10px;
+  height: 30px;
+  border: 1px solid #46529d;
+  border-radius: 5px;
+  padding-left: 5px;
 }
 
-.projectFormSubmitBtn{
-border: 0;
-border-radius: 5px;
-background-color: #2EBAEE;
-color: white;
-font-size: 12px;
-width: 150px;
-font-weight: 800;
-height: 25px;
+.projectFormSubmitBtn {
+  border: 0;
+  border-radius: 5px;
+  background-color: #2ebaee;
+  color: white;
+  font-size: 12px;
+  width: 150px;
+  font-weight: 800;
+  height: 25px;
 }
 
-.editProjForm{
-    display: flex;
-    padding-top: 10px;
-    flex-direction: column;
+.editProjForm {
+  display: flex;
+  padding-top: 10px;
+  flex-direction: column;
 }
 
-.projWrapEditIcon{
-    pointer-events: none;
+.projWrapEditIcon {
+  pointer-events: none;
 }
 
-.projWrapDelIcon{
-    font-size: 16px;
-    pointer-events: none;
+.projWrapDelIcon {
+  font-size: 16px;
+  pointer-events: none;
 }
 
-.emptyProjWrapper{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.emptyProjWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.emptyProjDesc{
-    text-align: center;
-    color: #2EBAEE;
+.emptyProjDesc {
+  text-align: center;
+  color: #2ebaee;
 }
 
-.emptyProjTitle{
-    text-align: center;
-    color: #46529D;
-    padding-bottom: 10px;
+.emptyProjTitle {
+  text-align: center;
+  color: #46529d;
+  padding-bottom: 10px;
 }
 
-.projectItemEditBtn, .projectItemDelBtn{
-    border: 0;
-    background-color: transparent;
+.projectItemEditBtn,
+.projectItemDelBtn {
+  border: 0;
+  background-color: transparent;
 }
 
-.projectItemDelBtn{
-    margin-left: 3px;
+.projectItemDelBtn {
+  margin-left: 3px;
 }
 
-.deleteProjContainer{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
+.deleteProjContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
 }
 
-.deleteProjTitle{
-    margin-top: 15px;
-    text-align: center;
-    color: #46529D;
-    width: 90%;
-    font-size: 20px;
-    font-weight: 400;
+.deleteProjTitle {
+  margin-top: 15px;
+  text-align: center;
+  color: #46529d;
+  width: 90%;
+  font-size: 20px;
+  font-weight: 400;
 }
 
-.buttonsWrapper{
-    margin-top: 20px;
-    display: flex;
-    width: 50%;
-    justify-content: space-around;
+.buttonsWrapper {
+  margin-top: 20px;
+  display: flex;
+  width: 50%;
+  justify-content: space-around;
 }
 
-.yesBtn, .noBtn{
-    width: 70px;
-    height: 35px;
-    color: white;
-    border-radius: 5px;
-    border: none;
+.yesBtn,
+.noBtn {
+  width: 70px;
+  height: 35px;
+  color: white;
+  border-radius: 5px;
+  border: none;
 }
 
-.yesBtn{
-    background-color: #46529D;
+.yesBtn {
+  background-color: #46529d;
 }
 
-.noBtn{
-    background-color: #2EBAEE;
+.noBtn {
+  background-color: #2ebaee;
 }
 
-.taskForm{
-    display: flex;
-    flex-direction: column;
+.taskForm {
+  display: flex;
+  flex-direction: column;
 }
 
-.emptyTaskListWrapper{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.emptyTaskListWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.emptyTaskListTitle{
-    text-align: center;
-    color: #46529D;
-    padding-bottom: 10px;
+.emptyTaskListTitle {
+  text-align: center;
+  color: #46529d;
+  padding-bottom: 10px;
 }
 
-.emptyTaskListDesc{
-    text-align: center;
-    color: #2EBAEE;
+.emptyTaskListDesc {
+  text-align: center;
+  color: #2ebaee;
 }
 
-.filterContainer{
-display: flex;
-justify-content: flex-start;
+.filterContainer {
+  display: flex;
+  justify-content: flex-start;
 }
 
-.filterTitle{
-margin-left: 10px;
-color: #46529D;
+.filterTitle {
+  margin-left: 10px;
+  color: #46529d;
 }
 
-.filterSelect{
-margin-left: 10px;
+.filterSelect {
+  margin-left: 10px;
 }
