@@ -375,9 +375,6 @@ const displayRender = (() => {
   // Make filter options
   // watch for change on select options then run the filter.
   let filterContainer = document.createElement("div");
-  let filterTitle = document.createElement("h3");
-  filterTitle.className = "filterTitle";
-  filterTitle.innerText = "Sort By:";
 
   filterContainer.className = "filterContainer";
   let filterSelect = document.createElement("select");
@@ -400,7 +397,6 @@ const displayRender = (() => {
   filterSelect.appendChild(optionDueDate);
   filterSelect.appendChild(optionDateCreated);
   filterSelect.appendChild(optionPriority);
-  filterContainer.appendChild(filterTitle);
   filterContainer.appendChild(filterSelect);
   filterSelect.addEventListener("change", () => {
     // console.log(filterSelect.value);
@@ -435,26 +431,26 @@ const displayRender = (() => {
   // Current Div Wrapper Creation:
   const currentDivWrapper = document.createElement("div");
   currentDivWrapper.className = "currentDivWrapper";
-  let currentDivIcon = document.createElement("i");
-  currentDivIcon.className = "fas fa-star";
-  currentDivIcon.style.color = "#46529D";
+  // let currentDivIcon = document.createElement("i");
+  // currentDivIcon.className = "fas fa-star";
+  // currentDivIcon.style.color = "darkorange";
   const currentDivTitle = document.createElement("h1");
   currentDivTitle.className = "currentTitle";
-  currentDivTitle.innerText = "Current Items:";
+  currentDivTitle.innerText = "Current";
   currentDiv.className = "currentDivList";
-  currentDivWrapper.appendChild(currentDivIcon);
+  // currentDivWrapper.appendChild(currentDivIcon);
   currentDivWrapper.appendChild(currentDivTitle);
 
   const completedDivWrapper = document.createElement("div");
   completedDivWrapper.className = "completedDivWrapper";
-  let completedDivIcon = document.createElement("i");
-  completedDivIcon.className = "fas fa-check-double";
-  completedDivIcon.style.color = "#46529D";
+  // let completedDivIcon = document.createElement("i");
+  // completedDivIcon.className = "fas fa-check-double";
+  // completedDivIcon.style.color = "#46529D";
   const completedDivTitle = document.createElement("h1");
   completedDivTitle.className = "completedTitle";
-  completedDivTitle.innerText = "Completed Items:";
+  completedDivTitle.innerText = "Completed";
   completedDiv.className = "completedDivList";
-  completedDivWrapper.appendChild(completedDivIcon);
+  // completedDivWrapper.appendChild(completedDivIcon);
   completedDivWrapper.appendChild(completedDivTitle);
   modalsContainer.appendChild(addItemBtnWrapper);
 
@@ -529,6 +525,11 @@ const displayRender = (() => {
     taskItemWrapper.id = `${taskObj.id}`;
     taskItemWrapper.dataset.taskwrapperid = `${taskObj.id}`;
 
+// Div format 
+// Title ---> Check, Expand
+// Desc
+// Priority, dueDate, Delete, Edit Btns
+
     //  Title
     let taskTitle = document.createElement("h2");
     taskTitle.innerText = `${taskObj.title}`;
@@ -544,7 +545,7 @@ const displayRender = (() => {
     // Clock Icon
     let taskDueDateIcon = document.createElement("i");
     taskDueDateIcon.className = "fas fa-clock";
-    taskDueDateIcon.style.color = "#2EBAEE";
+    taskDueDateIcon.style.color = "#424242";
     taskDueDateWrapper.appendChild(taskDueDateIcon);
 
     // dueDateText
@@ -567,8 +568,15 @@ const displayRender = (() => {
     taskPriorityWrapper.appendChild(taskPriority);
 
     //Check box and Delete and Edit Icon
+    let rightWrapper = document.createElement('div');
+    rightWrapper.className = 'rightWrapper';
+
     let rightIconsWrapper = document.createElement("div");
     rightIconsWrapper.className = "rightIconsWrapper";
+    let controlsWrapper = document.createElement('div');
+    controlsWrapper.className = 'controlsWrapper';
+    controlsWrapper.classList.add('controlsWrapperNoShow');
+
 
     // Checkmark
     let taskCompleteBtn = document.createElement("input");
@@ -595,9 +603,10 @@ const displayRender = (() => {
     // Delete Btn
     let taskMoreBtn = document.createElement("button");
     taskMoreBtn.className = "taskMoreBtn";
-    let taskDeleteIcon = document.createElement("i");
-    taskDeleteIcon.className = "far fa-trash-alt";
-    taskMoreBtn.appendChild(taskDeleteIcon);
+    // let taskDeleteIcon = document.createElement("i");
+    // taskDeleteIcon.className = "far fa-trash-alt";
+    // taskMoreBtn.appendChild(taskDeleteIcon);
+    taskMoreBtn.innerText = 'Delete';
 
     taskMoreBtn.addEventListener("click", () => {
       let taskKey = getKeyId(
@@ -614,9 +623,10 @@ const displayRender = (() => {
     //  Edit Btn
     let taskEditBtn = document.createElement("button");
     taskEditBtn.className = "taskEditBtn";
-    let taskEditBtnIcon = document.createElement("i");
-    taskEditBtnIcon.className = "fas fa-pencil-alt";
-    taskEditBtn.appendChild(taskEditBtnIcon);
+    taskEditBtn.innerText = 'Edit'
+    // let taskEditBtnIcon = document.createElement("i");
+    // taskEditBtnIcon.className = "fas fa-pencil-alt";
+    // taskEditBtn.appendChild(taskEditBtnIcon);
     taskEditBtn.addEventListener("click", () => {
       modalOpen();
       modalContentEditTask(
@@ -627,22 +637,23 @@ const displayRender = (() => {
         )
       );
     });
-
-    // Right wrapper appends
-    rightIconsWrapper.appendChild(taskMoreBtn);
-    rightIconsWrapper.appendChild(taskEditBtn);
-    rightIconsWrapper.appendChild(taskCompleteBtn);
+    let topControls = document.createElement('div');
+    topControls.className = 'topControls';
+    let topWrapper = document.createElement("div");
+    topWrapper.className = "topWrapper";
+    let botWrapper = document.createElement('div');
+    botWrapper.className = 'botWrapper';
+    topWrapper.appendChild(taskTitle);
+    controlsWrapper.appendChild(taskMoreBtn);
+    controlsWrapper.appendChild(taskEditBtn);
+    topControls.appendChild(taskCompleteBtn);
 
     // left wrapper small details append
-    let leftWrapper = document.createElement("div");
-    leftWrapper.className = "leftWrapper";
-    leftWrapper.appendChild(taskTitle);
     let metaWrapper = document.createElement("div");
     metaWrapper.className = "metaWrapper";
-    leftWrapper.appendChild(taskDesc);
     metaWrapper.appendChild(taskPriorityWrapper);
     metaWrapper.appendChild(taskDueDateWrapper);
-    leftWrapper.appendChild(metaWrapper);
+    botWrapper.appendChild(metaWrapper);
 
     // Expand Button to show desc
     let expandBtn = document.createElement("button");
@@ -654,28 +665,24 @@ const displayRender = (() => {
       switch (true) {
         case taskDesc.classList.contains("taskDesc"):
           taskDesc.classList.toggle("taskDescShow");
+          controlsWrapper.classList.toggle("controlsWrapperNoShow");
           break;
 
         case taskDesc.classList.contains("taskDescShow"):
           taskDesc.classList.toggle("taskDesc");
+          controlsWrapper.classList.toggle("controlsWrapper");
           break;
       }
 
-      switch (true) {
-        case expandBtnIcon.classList.contains("fa-angle-double-down"):
-          expandBtnIcon.classList.remove("fa-angle-double-down");
-          expandBtnIcon.classList.add("fa-angle-double-right");
-          break;
 
-        case expandBtnIcon.classList.contains("fa-angle-double-right"):
-          expandBtnIcon.classList.remove("fa-angle-double-right");
-          expandBtnIcon.classList.add("fa-angle-double-down");
-      }
     });
-    rightIconsWrapper.appendChild(expandBtn);
+    topControls.appendChild(expandBtn);
+    topWrapper.appendChild(topControls);
+    botWrapper.appendChild(controlsWrapper);
     // Append of all wrappers
-    taskItemWrapper.appendChild(leftWrapper);
-    taskItemWrapper.appendChild(rightIconsWrapper);
+    taskItemWrapper.appendChild(topWrapper);
+    taskItemWrapper.appendChild(taskDesc);
+    taskItemWrapper.appendChild(botWrapper);
 
     return taskItemWrapper;
   }
