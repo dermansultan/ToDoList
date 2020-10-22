@@ -103,10 +103,11 @@ function modalContentTask(modalOv) {
 
   let taskFormPrLbl = document.createElement("label");
   taskFormPrLbl.innerText = "Priority";
+  taskFormPrLbl.className = 'taskFormPrLbl'
 
   let taskFormPrSlct = document.createElement("select");
   taskFormPrSlct.required = true;
-  taskFormPrSlct.class = "taskFormPrSlct";
+  taskFormPrSlct.className = "taskFormPrSlct";
 
   let lowOption = document.createElement("option");
   lowOption.innerText = "Low";
@@ -130,7 +131,7 @@ function modalContentTask(modalOv) {
   let submitBtn = document.createElement("input");
   submitBtn.type = "submit";
   submitBtn.className = "submitBtn";
-  submitBtn.innerText = "create";
+  submitBtn.value = "Create Task";
   taskForm.addEventListener("submit", (event) => {
     event.preventDefault();
     currentProject.tasksList[`task${++currentProject.taskCounter}`] = taskItem(
@@ -231,7 +232,7 @@ function modalContentDelProj(modalOv, foundProj) {
 // Editing a task
 function modalContentEditTask(modalOv, taskKey) {
   let taskForm = document.createElement("form");
-  taskForm.className = "taskForm";
+  taskForm.className = "taskEditForm";
   console.log(taskKey);
   let taskObj = currentProject.tasksList[`${taskKey}`];
 
