@@ -73,7 +73,7 @@ function modalContentTask(modalOv) {
   let taskFormDescLbl = document.createElement("label");
   taskFormDescLbl.className = "taskFormDescLbl";
   taskFormDescLbl.innerText = "Description";
-  let taskFormDescIn = document.createElement("input");
+  let taskFormDescIn = document.createElement("textarea");
   taskFormDescIn.className = "taskFormDescIn";
   taskFormDescIn.placeholder = "Describe the task";
   taskFormDescIn.required = true;
@@ -232,9 +232,27 @@ function modalContentDelProj(modalOv, foundProj) {
 // Editing a task
 function modalContentEditTask(modalOv, taskKey) {
   let taskForm = document.createElement("form");
-  taskForm.className = "taskEditForm";
+  taskForm.className = "taskForm";
   console.log(taskKey);
   let taskObj = currentProject.tasksList[`${taskKey}`];
+
+
+  // Title Wrapper
+  let taskFormTitleWrapper = document.createElement('div');
+  taskFormTitleWrapper.className = 'taskFormTitleWrapper';
+
+  // Desc Wrapper
+  let taskFormDescWrapper = document.createElement('div');
+  taskFormDescWrapper.className = 'taskFormDescWrapper';
+
+  // Date Wrapper
+  let taskFormDateWrapper = document.createElement('div');
+  taskFormDateWrapper.className = 'taskFormDateWrapper';
+
+  // Priority Wrapper
+  let taskFormPrWrapper = document.createElement('div');
+  taskFormPrWrapper.className = 'taskFormPrWrapper';
+  
 
   //  Title
   let taskFormTitleLbl = document.createElement("label");
@@ -243,19 +261,19 @@ function modalContentEditTask(modalOv, taskKey) {
   let taskFormTitleIn = document.createElement("input");
   taskFormTitleIn.className = "taskFormTitleIn";
   taskFormTitleIn.value = `${taskObj.title}`;
-  taskForm.appendChild(taskFormTitleLbl);
-  taskForm.appendChild(taskFormTitleIn);
+  taskFormTitleWrapper.appendChild(taskFormTitleLbl);
+  taskFormTitleWrapper.appendChild(taskFormTitleIn);
 
   //  Desc
 
   let taskFormDescLbl = document.createElement("label");
   taskFormDescLbl.className = "taskFormDescLbl";
   taskFormDescLbl.innerText = "Description";
-  let taskFormDescIn = document.createElement("input");
+  let taskFormDescIn = document.createElement("textarea");
   taskFormDescIn.className = "taskFormDescIn";
   taskFormDescIn.value = `${taskObj.desc}`;
-  taskForm.appendChild(taskFormDescLbl);
-  taskForm.appendChild(taskFormDescIn);
+  taskFormDescWrapper.appendChild(taskFormDescLbl);
+  taskFormDescWrapper.appendChild(taskFormDescIn);
 
   // Date Due
 
@@ -267,8 +285,8 @@ function modalContentEditTask(modalOv, taskKey) {
   taskFormDateIn.type = "date";
   let today = new Date();
   taskFormDateIn.value = today.toISOString().substr(0, 10);
-  taskForm.appendChild(taskFormDateLbl);
-  taskForm.appendChild(taskFormDateIn);
+  taskFormDateWrapper.appendChild(taskFormDateLbl);
+  taskFormDateWrapper.appendChild(taskFormDateIn);
 
   //  Priority
 
@@ -301,13 +319,14 @@ function modalContentEditTask(modalOv, taskKey) {
   taskFormPrSlct.appendChild(medOption);
   taskFormPrSlct.appendChild(highOption);
 
-  taskForm.appendChild(taskFormPrLbl);
-  taskForm.appendChild(taskFormPrSlct);
+  taskFormPrWrapper.appendChild(taskFormPrLbl);
+  taskFormPrWrapper.appendChild(taskFormPrSlct);
 
   // submit button
   let submitBtn = document.createElement("input");
   submitBtn.className = "submitBtn";
   submitBtn.type = "submit";
+  submitBtn.value = "Save Changes";
   taskForm.addEventListener("submit", function (event) {
     event.preventDefault();
     // replaces already existing key with:
@@ -360,6 +379,10 @@ function modalContentEditTask(modalOv, taskKey) {
     displayRender.renderProj(currentProject);
     updateLocalStorage();
   });
+  taskForm.appendChild(taskFormTitleWrapper);
+  taskForm.appendChild(taskFormDescWrapper);
+  taskForm.appendChild(taskFormDateWrapper);
+  taskForm.appendChild(taskFormPrWrapper);
   taskForm.appendChild(submitBtn);
   modalOv.appendChild(taskForm);
 }
