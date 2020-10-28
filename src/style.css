@@ -62,7 +62,7 @@ body {
   color: #182c61;
   font-style: normal;
   font-weight: 600;
-  font-size: 16px;
+  font-size: clamp(16px, 2vw, 26px);
   margin-top: 8px;
   margin-left: 14px;
 }
@@ -73,13 +73,13 @@ body {
 }
 
 .taskPriority {
-  color: #2ebaee;
-  font-size: 10px;
+  font-size: clamp(10px, 0.95vw, 15px);
 }
 
 .taskDueDate {
   color: #182c61;
-  font-size: 10px;
+  white-space: nowrap;
+  font-size: clamp(10px, 0.95vw, 15px);
 }
 
 .taskDesc {
@@ -87,7 +87,7 @@ body {
   padding-top: 10px;
   opacity: 1;
   transition: 0.5s;
-  font-size: 12px;
+  font-size: clamp(12px, 0.75vw, 30px);
   text-overflow: ellipsis;
   padding-bottom: 5px;
   padding-right: 4px;
@@ -500,6 +500,7 @@ body {
 
 .fa-times-circle {
   font-size: 20px;
+  color: #182c61;
 }
 
 .projectModalContent {
@@ -514,7 +515,7 @@ body {
 }
 
 .fa-folder-plus {
-  color: #2ebaee;
+  color: #182c61;
   font-size: 50px;
 }
 
@@ -688,10 +689,63 @@ body {
   color: white;
   width: 104px;
   border: 0;
-  padding-left: 3px;
+  padding-left: 8px;
   font-size: 12px;
   font-weight: 300;
   height: 29px;
   background: #46529d;
   border-radius: 9px;
+}
+
+/* Desktops, Laptops  */
+
+@media only screen and (min-width: 992px) {
+  .taskItemWrapper{
+    width: 30vw;
+    }
+
+  .expandBtn{
+    display: none;
+  }  
+
+  .taskDesc{
+    opacity: 1;
+  }
+
+  .controlsWrapper{
+    display: flex;
+    margin-left: 10px
+  }
+
+  .taskDescShow{
+    display: flex;
+  }
+
+  .taskCompleteBtn{
+    transform: scale(2.25);
+  }
+
+  .topControls{
+    width: 20px;
+  }
+
+  .taskMoreBtn, .taskEditBtn {
+    color: white;
+    border: 0;
+    width: 200px;
+    height: 30px;
+    font-size: clamp(10px, 0.95vw, 15px);
+    border-radius: 5px;
+}
+
+.fa-clock {
+  font-size: clamp(10px, 0.95vw, 15px);
+  padding-right: 5px;
+}
+
+.fa-exclamation-circle {
+  font-size: clamp(10px, 0.95vw, 15px);
+  padding-right: 5px;
+}
+
 }
