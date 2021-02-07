@@ -365,7 +365,7 @@ body {
   padding-bottom: 30px;
 }
 
-.taskEditForm{
+.taskEditForm {
   display: flex;
   justify-content: space-around;
   flex-direction: column;
@@ -525,7 +525,7 @@ body {
 }
 
 .projItemTitle {
-  font-size: 15px;
+  font-size: clamp(10px, 3.95vw, 23px);
   color: #182c61;
   white-space: nowrap;
   overflow: hidden;
@@ -700,52 +700,73 @@ body {
 /* Desktops, Laptops  */
 
 @media only screen and (min-width: 992px) {
-  .taskItemWrapper{
+  .taskItemWrapper {
     width: 30vw;
-    }
+  }
 
-  .expandBtn{
+  .expandBtn {
     display: none;
-  }  
+  }
 
-  .taskDesc{
+  .taskDesc {
     opacity: 1;
+    font-size: clamp(12px, 1vw, 18px);
   }
 
-  .controlsWrapper{
+  .controlsWrapper {
     display: flex;
-    margin-left: 10px
+    margin-left: 10px;
   }
 
-  .taskDescShow{
+  .taskDescShow {
     display: flex;
   }
 
-  .taskCompleteBtn{
+  .taskCompleteBtn {
     transform: scale(2.25);
   }
 
-  .topControls{
+  .topControls {
     width: 20px;
   }
 
-  .taskMoreBtn, .taskEditBtn {
+  .taskMoreBtn,
+  .taskEditBtn {
     color: white;
     border: 0;
     width: 200px;
     height: 30px;
     font-size: clamp(10px, 0.95vw, 15px);
     border-radius: 5px;
-}
+  }
 
-.fa-clock {
-  font-size: clamp(10px, 0.95vw, 15px);
-  padding-right: 5px;
-}
+  .fa-clock {
+    font-size: clamp(10px, 0.95vw, 15px);
+    padding-right: 5px;
+  }
 
-.fa-exclamation-circle {
-  font-size: clamp(10px, 0.95vw, 15px);
-  padding-right: 5px;
-}
+  .fa-exclamation-circle {
+    font-size: clamp(10px, 0.95vw, 15px);
+    padding-right: 5px;
+  }
+
+  .completedTitle,
+  .currentTitle {
+    font-size: clamp(10px, 4vw, 25px);
+  }
+
+  .completedDivWrapper,
+  .currentDivWrapper {
+    justify-content: center;
+  }
+
+  .projectModalContentList {
+    display: flex;
+    justify-content: center;
+  }
+
+  .projItemTitle{
+    overflow: visible;
+  }
 
 }
